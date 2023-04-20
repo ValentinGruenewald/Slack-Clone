@@ -6,11 +6,19 @@
     </div>
   </div>
 
-  <div class="main-content">
-    <p>Nachricht 1</p>
-    <p>Nachricht 2</p>
-    <p>Nachricht 3</p>
-    <p>Nachricht 4</p>
+  <div class="main-content" *ngFor="let message of allMessages">
+    <div class="chat-message">
+      <img />
+      <div class="chat-message-text">
+        <div class="message-header">
+          <p class="message-name">
+            <b>{{ message.name }}</b>
+          </p>
+          <p class="message-time">{{ message.time }} Uhr</p>
+        </div>
+        <p class="message-text">{{ message.message }}</p>
+      </div>
+    </div>
   </div>
 
   <div class="text-input">
