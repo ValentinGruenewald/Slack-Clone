@@ -14,9 +14,10 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavComponent } from './sidenav/sidenav.component';
+import { MainComponent } from './main/main.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SidenavComponent],
+  declarations: [AppComponent, LoginComponent, SidenavComponent, MainComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
