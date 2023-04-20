@@ -15,9 +15,10 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MainComponent } from './main/main.component';
+import { ChatComponent } from './chat/chat.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SidenavComponent, MainComponent],
+  declarations: [AppComponent, LoginComponent, SidenavComponent, MainComponent, ChatComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,

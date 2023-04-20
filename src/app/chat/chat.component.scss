@@ -1,0 +1,45 @@
+.chat {
+  display: flex;
+  flex-direction: column;
+}
+
+.header {
+  padding-inline: 16px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  min-height: 56px;
+  border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
+}
+
+.personal-information {
+  padding: 3px;
+  border-radius: 4px;
+  padding-right: 12px;
+  display: flex;
+  align-items: center;
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+
+  div {
+    width: 24px;
+    height: 24px;
+    background-color: black;
+    border-radius: 4px;
+    margin-right: 8px;
+  }
+
+  &:hover {
+    background-color: rgba($color: #000000, $alpha: 0.04);
+  }
+}
+
+.main-content {
+  display: flex;
+  flex-direction: column-reverse;
+}
+
+.text-input {
+    
+}
