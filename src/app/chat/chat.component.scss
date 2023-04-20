@@ -41,5 +41,43 @@
 }
 
 .text-input {
-    
+  width: 100%;
+  position: absolute;
+  bottom: 0;
+
+  div {
+    margin: 16px;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 8px;
+    padding: 16px;
+    background-color: white;
+    display: flex;
+
+    input {
+      border: none;
+      width: 100%;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1px;
+      border-radius: 4px;
+
+      background-color: white;
+      color: lightgray;
+
+      &:hover {
+        background-color: #158567;
+        color: white;
+      }
+    }
+  }
 }

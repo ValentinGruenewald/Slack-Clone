@@ -16,9 +16,16 @@ import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavComponent } from './sidenav/sidenav.component';
 import { MainComponent } from './main/main.component';
 import { ChatComponent } from './chat/chat.component';
+import { MatIconModule } from '@angular/material/icon';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SidenavComponent, MainComponent, ChatComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    SidenavComponent,
+    MainComponent,
+    ChatComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -31,6 +38,7 @@ import { ChatComponent } from './chat/chat.component';
     MatButtonModule,
     BrowserAnimationsModule,
     MatSidenavModule,
+    MatIconModule,
   ],
   providers: [],
   bootstrap: [AppComponent],
