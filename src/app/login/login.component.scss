@@ -1,0 +1,26 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  max-width: 500px;
+  width: 100%;
+
+  input {
+    margin-bottom: 20px;
+    height: 44px;
+  }
+
+  button {
+    background-color: #611f69;
+    color: white;
+    height: 44px;
+    margin-bottom: 20px;
+  }
+}
