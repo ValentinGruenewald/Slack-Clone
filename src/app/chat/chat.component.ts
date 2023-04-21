@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Message } from 'src/models/message.class';
 
 @Component({
   selector: 'app-chat',
@@ -23,4 +24,13 @@ export class ChatComponent {
       time: '18:05',
     },
   ];
+
+  sendMessage(message) {
+    let sentMessage = new Message({
+      name: 'name1',
+      message: message,
+      time: new Date(),
+    });
+    this.allMessages.push(sentMessage);
+  }
 }

@@ -23,8 +23,8 @@
 
   <div class="text-input">
     <div>
-      <input type="text" placeholder="Message" />
-      <button><mat-icon>chevron_right</mat-icon></button>
+      <input type="text" #message placeholder="Message" />
+      <button (click)="sendMessage(message.value)"><mat-icon>chevron_right</mat-icon></button>
     </div>
   </div>
 </div>
