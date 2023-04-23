@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
 import { Message } from 'src/models/message.class';
+import { Chat } from 'src/models/user.class';
 
 @Component({
   selector: 'app-chat',
@@ -7,23 +8,28 @@ import { Message } from 'src/models/message.class';
   styleUrls: ['./chat.component.scss'],
 })
 export class ChatComponent {
-  allMessages = [
-    {
-      name: 'Name1',
-      message: 'Message1',
-      time: '17:59',
-    },
-    {
-      name: 'Name1',
-      message: 'Message2',
-      time: '18:00',
-    },
-    {
-      name: 'Name1',
-      message: 'Message3',
-      time: '18:05',
-    },
-  ];
+  chatId: any = '';
+  chat = {
+    chatId: 'testId1234',
+    userIds: ['user1', 'user2'],
+    allMessages: [
+      {
+        name: 'Name1',
+        message: 'Message1',
+        time: '17:59',
+      },
+      {
+        name: 'Name1',
+        message: 'Message2',
+        time: '18:00',
+      },
+      {
+        name: 'Name1',
+        message: 'Message3',
+        time: '18:05',
+      },
+    ],
+  };
 
   sendMessage(message) {
     let sentMessage = new Message({
@@ -31,6 +37,6 @@ export class ChatComponent {
       message: message,
       time: new Date(),
     });
-    this.allMessages.push(sentMessage);
+    this.chat.allMessages.push(sentMessage);
   }
 }

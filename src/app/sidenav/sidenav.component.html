@@ -1,5 +1,4 @@
 <div class="title">Your Company</div>
-<ul>
-  <li>Chat 1</li>
-  <li>Chat 2</li>
+<ul *ngFor="let chat of allChats">
+  <li (click)="show()">{{ chat.userIds[0] }}</li>
 </ul>

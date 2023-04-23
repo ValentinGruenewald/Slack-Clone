@@ -6,7 +6,11 @@ import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
 import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
-import { provideFirestore, getFirestore } from '@angular/fire/firestore';
+import {
+  provideFirestore,
+  getFirestore,
+  FirestoreModule,
+} from '@angular/fire/firestore';
 import { LoginComponent } from './login/login.component';
 import { MatInputModule } from '@angular/material/input';
 import { MatFormFieldModule } from '@angular/material/form-field';
@@ -14,18 +18,12 @@ import { MatButtonModule } from '@angular/material/button';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSidenavModule } from '@angular/material/sidenav';
 import { SidenavComponent } from './sidenav/sidenav.component';
-import { MainComponent } from './main/main.component';
 import { ChatComponent } from './chat/chat.component';
 import { MatIconModule } from '@angular/material/icon';
+import { AngularFireModule } from '@angular/fire/compat';
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    LoginComponent,
-    SidenavComponent,
-    MainComponent,
-    ChatComponent,
-  ],
+  declarations: [AppComponent, LoginComponent, SidenavComponent, ChatComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -33,6 +31,8 @@ import { MatIconModule } from '@angular/material/icon';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
+    AngularFireModule.initializeApp(environment.firebase),
+    FirestoreModule,
     MatInputModule,
     MatFormFieldModule,
     MatButtonModule,
