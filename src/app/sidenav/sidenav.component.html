@@ -1,4 +1,9 @@
 <div class="title">Your Company</div>
 <ul *ngFor="let chat of allChats">
-  <li (click)="show()">{{ chat.userIds[0] }}</li>
+  <li *ngIf="chat.groupchat" [routerLink]="['/client/' + chat.customIdName]">
+    {{ findUser(chat.id).name }}
+  </li>
+  <li *ngIf="!chat.groupchat" [routerLink]="['/client/' + chat.customIdName]">
+    {{ findUser(chat.id).name }}
+  </li>
 </ul>
