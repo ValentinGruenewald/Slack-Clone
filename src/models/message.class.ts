@@ -7,10 +7,8 @@ export class Message {
     this.userId = obj ? obj.userId : '';
     this.message = obj ? obj.message : '';
     this.time = Intl.DateTimeFormat('de-DE', {
-      hour: 'numeric',
-      minute: 'numeric',
-      month: 'numeric',
-      day: 'numeric',
+      dateStyle: 'short',
+      timeStyle: 'short',
     }).format(new Date());
   }
 
