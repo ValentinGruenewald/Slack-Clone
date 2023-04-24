@@ -11,20 +11,23 @@
         </div>
       </div>
 
-      <div class="main-content" *ngFor="let message of chat.messages">
-        <div class="chat-message">
-          <img />
-          <div class="chat-message-text">
-            <div class="message-header">
-              <p class="message-name">
-                <b>{{ message.userId }}</b>
-              </p>
-              <p class="message-time">{{ message.time }} Uhr</p>
+      <ng-container *ngIf="(chat$ | async) as chat">
+        
+        <div class="main-content" *ngFor="let message of chat.messages">
+          <div class="chat-message">
+            <img />
+            <div class="chat-message-text">
+              <div class="message-header">
+                <p class="message-name">
+                  <b>{{ findUser(chat.id).name }}</b>
+                </p>
+                <p class="message-time">{{ message.time }} Uhr</p>
+              </div>
+              <p class="message-text">{{ message.message }}</p>
             </div>
-            <p class="message-text">{{ message.message }}</p>
           </div>
         </div>
-      </div>
+      </ng-container>
 
       <div class="text-input">
         <div>

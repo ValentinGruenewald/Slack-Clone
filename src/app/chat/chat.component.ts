@@ -1,8 +1,10 @@
 import { Component, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
+import { Chat } from 'src/models/chat.class';
+import { User } from '@angular/fire/auth';
+import { Observable } from 'rxjs';
 import { Message } from 'src/models/message.class';
-import { Chat } from 'src/models/Chat.class';
 
 @Component({
   selector: 'app-chat',
@@ -11,7 +13,8 @@ import { Chat } from 'src/models/Chat.class';
 })
 export class ChatComponent implements OnInit {
   chatId: any = '';
-  chat: Chat = new Chat();
+  chat$: Observable<Chat>;
+  allUsers: User[] = [];
 
   constructor(
     private route: ActivatedRoute,
@@ -22,25 +25,39 @@ export class ChatComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       this.chatId = paramMap.get('id');
       this.getChat();
+
+      this.firestore
+        .collection('users')
+        .valueChanges({ idField: 'customIdName' })
+        .subscribe((changes: any) => {
+          this.allUsers = changes;
+        });
+
+      this.chat$ = this.getChat();
     });
   }
 
   getChat() {
-    this.firestore
+    return this.firestore
       .collection('chats')
       .doc(this.chatId)
-      .valueChanges()
-      .subscribe((changes: any) => {
-        this.chat = changes;
-      });
+      .valueChanges() as Observable<Chat>;
   }
 
   sendMessage(message) {
     let sentMessage = new Message({
       userId: 'QM1Lb5uyABUDZrgz180W',
       message: message,
-      time: new Date().getHours() + ':' + new Date().getUTCMinutes(),
     });
-    //this.firestore.collection('chats').doc(this.chatId).update();
+    console.log(sentMessage);
+    this.firestore
+      .collection('chats')
+      .doc(this.chatId)
+      .collection('messages')
+      .add(sentMessage.toJSON());
+  }
+
+  findUser(id: string): User {
+    return this.allUsers.filter((user) => user.uid === id)[0];
   }
 }

@@ -5,8 +5,13 @@ export class Message {
 
   constructor(obj?: any) {
     this.userId = obj ? obj.userId : '';
-    this.time = obj ? obj.time : '';
     this.message = obj ? obj.message : '';
+    this.time = Intl.DateTimeFormat('de-DE', {
+      hour: 'numeric',
+      minute: 'numeric',
+      month: 'numeric',
+      day: 'numeric',
+    }).format(new Date());
   }
 
   public toJSON() {

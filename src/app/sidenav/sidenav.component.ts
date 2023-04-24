@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Chat } from 'src/models/Chat.class';
+import { Chat } from 'src/models/chat.class';
 
 @Component({
   selector: 'app-sidenav',
@@ -14,6 +14,7 @@ export class SidenavComponent implements OnInit {
   chat = new Chat();
   allChats: Chat[] = [];
   allUsers: User[] = [];
+  currentUserId: string = 'QM1Lb5uyABUDZrgz180W';
 
   ngOnInit(): void {
     this.firestore
@@ -21,7 +22,6 @@ export class SidenavComponent implements OnInit {
       .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
         this.allUsers = changes;
-        console.log(this.allUsers);
       });
 
     this.firestore
@@ -29,11 +29,14 @@ export class SidenavComponent implements OnInit {
       .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
         this.allChats = changes;
-        console.log(this.allChats);
       });
   }
 
   findUser(id: string): User {
     return this.allUsers.filter((user) => user.uid === id)[0];
+  }
+
+  checkIfUserIsInChat(userIds: string[] | undefined) {
+    return userIds?.some((id) => id === this.currentUserId);
   }
 }
