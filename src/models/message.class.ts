@@ -1,3 +1,8 @@
+export type JsonMessage = {
+  userId: string;
+  message: string;
+  createdAt: string;
+};
 export class Message {
   userId: string;
   message: string;
@@ -12,7 +17,7 @@ export class Message {
     }).format(new Date());
   }
 
-  public toJSON() {
+  public toJSON(): JsonMessage {
     return {
       userId: this.userId,
       message: this.message,
@@ -20,3 +25,5 @@ export class Message {
     };
   }
 }
+
+

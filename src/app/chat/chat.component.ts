@@ -15,6 +15,7 @@ export class ChatComponent implements OnInit {
   chatId: any = '';
   chat$: Observable<Chat>;
   allUsers: User[] = [];
+  currentUserId: string = 'QM1Lb5uyABUDZrgz180W';
 
   constructor(
     private route: ActivatedRoute,
@@ -44,17 +45,16 @@ export class ChatComponent implements OnInit {
       .valueChanges() as Observable<Chat>;
   }
 
-  sendMessage(message) {
+  sendMessage(message: string, chat: Chat) {
     let sentMessage = new Message({
-      userId: 'QM1Lb5uyABUDZrgz180W',
-      message: message,
+      userId: this.currentUserId,
+      message: message
     });
     console.log(sentMessage);
-    this.firestore
-      .collection('chats')
-      .doc(this.chatId)
-      .collection('messages')
-      .add(sentMessage.toJSON());
+    //chat.userIds[1] = 'test2';
+    chat.messages.push(sentMessage.toJSON());
+    console.log(chat);
+    this.firestore.collection('chats').doc(this.chatId).update(chat);
   }
 
   findUser(id: string): User {

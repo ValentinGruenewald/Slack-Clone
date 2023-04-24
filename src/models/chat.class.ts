@@ -1,8 +1,10 @@
+import { JsonMessage, Message } from "./message.class";
+
 export class Chat {
   chatName: string;
   groupchat: boolean;
   userIds: [string, string];
-  messages: [{ name: string; message; string; time: number }];
+  messages: JsonMessage[];
 
   constructor(obj?: any) {
     this.chatName = obj ? obj.chatName : '';

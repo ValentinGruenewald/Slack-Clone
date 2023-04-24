@@ -11,8 +11,7 @@
         </div>
       </div>
 
-      <ng-container *ngIf="(chat$ | async) as chat">
-        
+      <ng-container *ngIf="chat$ | async as chat">
         <div class="main-content" *ngFor="let message of chat.messages">
           <div class="chat-message">
             <img />
@@ -27,16 +26,16 @@
             </div>
           </div>
         </div>
-      </ng-container>
 
-      <div class="text-input">
-        <div>
-          <input type="text" #message placeholder="Message" />
-          <button (click)="sendMessage(message.value)">
-            <mat-icon>chevron_right</mat-icon>
-          </button>
+        <div class="text-input">
+          <div>
+            <input type="text" #message placeholder="Message" />
+            <button (click)="sendMessage(message.value, chat)">
+              <mat-icon>chevron_right</mat-icon>
+            </button>
+          </div>
         </div>
-      </div>
+      </ng-container>
     </div>
   </mat-drawer-content>
 </mat-drawer-container>
