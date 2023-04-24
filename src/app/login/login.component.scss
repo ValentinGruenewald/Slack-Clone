@@ -17,6 +17,11 @@
     height: 44px;
   }
 
+  span{
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
   button {
     background-color: #611f69;
     color: white;
@@ -44,4 +49,9 @@
   background-color: gray;
   width: 98%;
   height: 2px;
+}
+
+.sign-up-here{
+  cursor: pointer;
+  text-decoration: underline solid 1px;
 }

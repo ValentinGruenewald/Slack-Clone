@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth, getAuth } from '@angular/fire/auth';
+import { provideAuth, getAuth, Auth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import {
   provideFirestore,
@@ -21,9 +21,11 @@ import { SidenavComponent } from './sidenav/sidenav.component';
 import { ChatComponent } from './chat/chat.component';
 import { MatIconModule } from '@angular/material/icon';
 import { AngularFireModule } from '@angular/fire/compat';
+import { AuthService } from './services/auth.service';
+import { SignupComponent } from './signup/signup.component';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SidenavComponent, ChatComponent],
+  declarations: [AppComponent, LoginComponent, SidenavComponent, ChatComponent, SignupComponent],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -40,7 +42,9 @@ import { AngularFireModule } from '@angular/fire/compat';
     MatSidenavModule,
     MatIconModule,
   ],
-  providers: [],
+  providers: [
+    AuthService
+  ],
   bootstrap: [AppComponent],
 })
 export class AppModule {}
