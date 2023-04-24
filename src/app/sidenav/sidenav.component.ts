@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { Chat } from 'src/models/user.class';
+import { Chat } from 'src/models/Chat.class';
 
 @Component({
   selector: 'app-sidenav',

@@ -11,13 +11,13 @@
         </div>
       </div>
 
-      <div class="main-content" *ngFor="let message of chat.allMessages">
+      <div class="main-content" *ngFor="let message of chat.messages">
         <div class="chat-message">
           <img />
           <div class="chat-message-text">
             <div class="message-header">
               <p class="message-name">
-                <b>{{ message.name }}</b>
+                <b>{{ message.userId }}</b>
               </p>
               <p class="message-time">{{ message.time }} Uhr</p>
             </div>

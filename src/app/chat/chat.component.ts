@@ -1,42 +1,46 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { ActivatedRoute } from '@angular/router';
 import { Message } from 'src/models/message.class';
-import { Chat } from 'src/models/user.class';
+import { Chat } from 'src/models/Chat.class';
 
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
   styleUrls: ['./chat.component.scss'],
 })
-export class ChatComponent {
+export class ChatComponent implements OnInit {
   chatId: any = '';
-  chat = {
-    chatId: 'testId1234',
-    userIds: ['user1', 'user2'],
-    allMessages: [
-      {
-        name: 'Name1',
-        message: 'Message1',
-        time: '17:59',
-      },
-      {
-        name: 'Name1',
-        message: 'Message2',
-        time: '18:00',
-      },
-      {
-        name: 'Name1',
-        message: 'Message3',
-        time: '18:05',
-      },
-    ],
-  };
+  chat: Chat = new Chat();
+
+  constructor(
+    private route: ActivatedRoute,
+    private firestore: AngularFirestore
+  ) {}
+
+  ngOnInit(): void {
+    this.route.paramMap.subscribe((paramMap) => {
+      this.chatId = paramMap.get('id');
+      this.getChat();
+    });
+  }
+
+  getChat() {
+    this.firestore
+      .collection('chats')
+      .doc(this.chatId)
+      .valueChanges()
+      .subscribe((changes: any) => {
+        this.chat = changes;
+      });
+  }
 
   sendMessage(message) {
     let sentMessage = new Message({
-      name: 'name1',
+      userId: 'QM1Lb5uyABUDZrgz180W',
       message: message,
-      time: new Date(),
+      time: new Date().getHours() + ':' + new Date().getUTCMinutes(),
     });
-    this.chat.allMessages.push(sentMessage);
+    //this.firestore.collection('chats').doc(this.chatId).update();
   }
 }
