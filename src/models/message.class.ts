@@ -1,12 +1,12 @@
 export class Message {
   userId: string;
-  time: string;
   message: string;
+  createdAt: string;
 
   constructor(obj?: any) {
     this.userId = obj ? obj.userId : '';
     this.message = obj ? obj.message : '';
-    this.time = Intl.DateTimeFormat('de-DE', {
+    this.createdAt = Intl.DateTimeFormat('de-DE', {
       dateStyle: 'short',
       timeStyle: 'short',
     }).format(new Date());
@@ -15,8 +15,8 @@ export class Message {
   public toJSON() {
     return {
       userId: this.userId,
-      time: this.time,
       message: this.message,
+      createdAt: this.createdAt,
     };
   }
 }
