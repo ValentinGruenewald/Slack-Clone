@@ -23,9 +23,17 @@ import { MatIconModule } from '@angular/material/icon';
 import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './services/auth.service';
 import { SignupComponent } from './signup/signup.component';
+import { ReactiveFormsModule } from '@angular/forms';
+import { HotToastModule } from '@ngneat/hot-toast';
 
 @NgModule({
-  declarations: [AppComponent, LoginComponent, SidenavComponent, ChatComponent, SignupComponent],
+  declarations: [
+    AppComponent,
+    LoginComponent,
+    SidenavComponent,
+    ChatComponent,
+    SignupComponent,
+  ],
   imports: [
     BrowserModule,
     AppRoutingModule,
@@ -41,10 +49,10 @@ import { SignupComponent } from './signup/signup.component';
     BrowserAnimationsModule,
     MatSidenavModule,
     MatIconModule,
+    ReactiveFormsModule,
+    HotToastModule.forRoot(),
   ],
-  providers: [
-    AuthService
-  ],
+  providers: [AuthService],
   bootstrap: [AppComponent],
 })
 export class AppModule {}

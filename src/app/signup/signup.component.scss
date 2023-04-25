@@ -1,0 +1,43 @@
+.content {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+.login-form {
+  display: flex;
+  flex-direction: column;
+  min-width: 150px;
+  max-width: 400px;
+  width: 100%;
+
+  input {
+    margin-bottom: 20px;
+    height: 44px;
+  }
+
+  span {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+
+  button {
+    background-color: #611f69;
+    color: white;
+    height: 44px;
+    margin: 20px 0;
+
+    svg {
+      height: 18px;
+      width: 18px;
+      margin-right: 18px;
+    }
+  }
+}
+
+.flex-row {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
