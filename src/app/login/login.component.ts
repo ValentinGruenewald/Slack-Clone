@@ -8,7 +8,7 @@ import {
 } from '@angular/forms';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Router } from '@angular/router';
-import { HotToastService } from '@ngneat/hot-toast';
+//import { HotToastService } from '@ngneat/hot-toast';
 
 @Component({
   selector: 'app-login',
@@ -27,7 +27,7 @@ export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public router: Router,
-    private toast: HotToastService
+   // private toast: HotToastService
   ) {}
 
   ngOnInit() {}
@@ -41,11 +41,11 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(email, password)
       .pipe(
-        this.toast.observe({
-          success: 'Logged in successfully',
-          loading: 'Logging in ...',
-          error: 'There was an error',
-        })
+        // this.toast.observe({
+        //   success: 'Logged in successfully',
+        //   loading: 'Logging in ...',
+        //   error: 'There was an error',
+        // })
       )
       .subscribe(() => {
         this.router.navigate(['/client']);
