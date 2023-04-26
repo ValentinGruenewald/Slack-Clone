@@ -1,8 +1,14 @@
 import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { from } from 'rxjs';
-import { Auth, signInWithEmailAndPassword } from '@angular/fire/auth';
+import { from, switchMap } from 'rxjs';
+import {
+  Auth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  updateProfile,
+  user,
+} from '@angular/fire/auth';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -31,14 +37,20 @@ export class AuthService {
     return from(signInWithEmailAndPassword(this.auth, username, password));
   }
 
-  async signup(email, password) {
-    await this.firebaseAuth
-      .createUserWithEmailAndPassword(email, password)
-      .then((response) => {
-        this.isLoggedIn = true;
-        localStorage.setItem('user', JSON.stringify(response.user));
-      });
+  signUp(name, email, password) {
+    return from(
+      createUserWithEmailAndPassword(this.auth, email, password)
+    ).pipe(switchMap(({ user }) => updateProfile(user, { displayName: name })));
   }
+
+  // async signup(email, password) {
+  //   await this.firebaseAuth
+  //     .createUserWithEmailAndPassword(email, password)
+  //     .then((response) => {
+  //       this.isLoggedIn = true;
+  //       localStorage.setItem('user', JSON.stringify(response.user));
+  //     });
+  // }
 
   logOut() {
     this.firebaseAuth.signOut();
@@ -60,5 +72,4 @@ export class AuthService {
         console.log(error);
       });
   }
-
 }
