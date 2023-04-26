@@ -4,12 +4,12 @@
     *ngIf="chat.groupchat && checkIfUserIsInChat(chat.userIds)"
     [routerLink]="['/client/' + chat.customIdName]"
   >
-    {{ findUser(chat.id).name }}
+    {{ chat.chatName }}
   </li>
   <li
     *ngIf="!chat.groupchat && checkIfUserIsInChat(chat.userIds)"
     [routerLink]="['/client/' + chat.customIdName]"
   >
-    {{ findUser(chat.id).name }}
+    {{ showDirectChatName(chat.userIds) }}
   </li>
 </ul>

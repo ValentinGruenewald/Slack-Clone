@@ -3,7 +3,7 @@ import { JsonMessage, Message } from "./message.class";
 export class Chat {
   chatName: string;
   groupchat: boolean;
-  userIds: [string, string];
+  userIds: string[];
   messages: JsonMessage[];
 
   constructor(obj?: any) {

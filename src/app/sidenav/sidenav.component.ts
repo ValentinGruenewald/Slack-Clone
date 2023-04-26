@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { User } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { findIndex } from 'rxjs';
 import { Chat } from 'src/models/chat.class';
 
 @Component({
@@ -13,7 +14,7 @@ export class SidenavComponent implements OnInit {
 
   chat = new Chat();
   allChats: Chat[] = [];
-  allUsers: User[] = [];
+  allUsers;
   currentUserId: string = 'QM1Lb5uyABUDZrgz180W';
 
   ngOnInit(): void {
@@ -32,8 +33,14 @@ export class SidenavComponent implements OnInit {
       });
   }
 
-  findUser(id: string): User {
-    return this.allUsers.filter((user) => user.uid === id)[0];
+  showDirectChatName(userIds: string[]) {
+    if (userIds[0] == this.currentUserId) {
+      return this.allUsers.filter((user) => user.customIdName === userIds[1])[0]
+        .name;
+    } else {
+      return this.allUsers.filter((user) => user.customIdName === userIds[0])[0]
+        .name;
+    }
   }
 
   checkIfUserIsInChat(userIds: string[] | undefined) {

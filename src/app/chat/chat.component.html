@@ -18,7 +18,7 @@
             <div class="chat-message-text">
               <div class="message-header">
                 <p class="message-name">
-                  <b>{{ findUser(chat.id).name }}</b>
+                  <b>{{ findUser(message.userId).name }}</b>
                 </p>
                 <p class="message-time">{{ message.createdAt }} Uhr</p>
               </div>
@@ -32,6 +32,9 @@
             <input type="text" #message placeholder="Message" />
             <button (click)="sendMessage(message.value, chat)">
               <mat-icon>chevron_right</mat-icon>
+            </button>
+            <button (click)="createGroupChat(message.value)">
+              <mat-icon>chevron_up</mat-icon>
             </button>
           </div>
         </div>
