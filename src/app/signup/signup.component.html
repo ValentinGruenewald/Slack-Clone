@@ -1,22 +1,35 @@
 <div class="content">
+
+  <div class="logo-area">
+    <img src="./assets/img/logo.png" alt="">
+    <span>Slack-Clone</span>
+  </div>
+
   <form [formGroup]="signUpForm" class="login-form" (ngSubmit)="submit()">
-        <mat-form-field class="example-full-width">
-          <input type="text" matInput placeholder="Your Name" formControlName="name">
-          <mat-error *ngIf="name?.errors?.['required']">Name is required</mat-error>
-        </mat-form-field>
+
+    <mat-form-field class="example-full-width">
+      <input type="text" matInput placeholder="Your Name" formControlName="name">
+      <mat-error *ngIf="name?.errors?.['required']">Name is required</mat-error>
+    </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <input type="email" matInput placeholder="Your Email adress" formControlName="email">
       <mat-error *ngIf="email?.errors?.['required']">Email is required</mat-error>
     </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <input matInput type="password" placeholder="Your password" formControlName="password">
       <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
     </mat-form-field>
+
     <mat-form-field class="example-full-width">
       <input matInput type="password" placeholder="Confirm your password" formControlName="confirmPassword">
       <mat-error *ngIf="confirmPassword?.errors?.['required']">Confirm your password is required </mat-error>
     </mat-form-field>
+
     <mat-error *ngIf="signUpForm?.errors?.['passwordsDontMatch']">Passwords should match</mat-error>
+
     <button mat-raised-button color="primary" type="submit">Sign Up</button>
+
   </form>
 </div>

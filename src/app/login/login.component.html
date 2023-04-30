@@ -1,11 +1,17 @@
 <div class="content">
 
+  <div class="logo-area">
+    <img src="./assets/img/logo.png" alt="">
+    <span>Slack-Clone</span>
+  </div>
+
+  
   <form [formGroup]="loginForm" class="login-form" (ngSubmit)="submit()">
-    <mat-form-field class="example-full-width">
+    <mat-form-field>
       <input type="email" matInput placeholder="Your Email adress" formControlName="email">
       <mat-error *ngIf="email?.errors?.['required']">Email is required</mat-error>
     </mat-form-field>
-    <mat-form-field class="example-full-width">
+    <mat-form-field>
       <input matInput type="password" placeholder="Your password" formControlName="password">
       <mat-error *ngIf="password?.errors?.['required']">Password is required</mat-error>
     </mat-form-field>
@@ -16,7 +22,7 @@
 
   <div class="display-flex">
     <div class="line"></div>
-    <div>OR</div>
+    <span>OR</span>
     <div class="line"></div>
   </div>
 

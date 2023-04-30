@@ -7,6 +7,20 @@
   padding: 32px;
 }
 
+.logo-area {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 80px;
+  font-size: 40px;
+
+  img {
+    height: 100px;
+    padding-bottom: 20px;
+  }
+
+  
+}
 .login-form {
   display: flex;
   flex-direction: column;
@@ -44,6 +58,7 @@
   align-items: center;
   min-width: 150px;
   max-width: 400px;
+  width: 100%;
   margin: 20px 0;
 
   span {
@@ -62,5 +77,3 @@
   text-decoration: underline solid 1px;
   color: black;
 }
-
-
