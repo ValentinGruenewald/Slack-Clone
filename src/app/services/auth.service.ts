@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { from, switchMap } from 'rxjs';
+import { Observable, from, switchMap } from 'rxjs';
 import {
   Auth,
   createUserWithEmailAndPassword,
@@ -10,6 +10,7 @@ import {
   user,
 } from '@angular/fire/auth';
 import { Router } from '@angular/router';
+import { HotToastService } from '@ngneat/hot-toast';
 
 @Injectable({
   providedIn: 'root',
@@ -20,22 +21,9 @@ export class AuthService {
   constructor(
     public firebaseAuth: AngularFireAuth,
     private auth: Auth,
-    public router: Router
+    public router: Router,
+    private toast: HotToastService
   ) {}
-
-  // async login(email, password) {
-  //   await this.firebaseAuth
-  //     .signInWithEmailAndPassword(email, password)
-  //     .then((response) => {
-  //       this.isLoggedIn = true;
-  //       localStorage.setItem('user', JSON.stringify(response.user));
-  //              console.log(response.user);
-  //     });
-  // }
-
-  login(username, password) {
-    return from(signInWithEmailAndPassword(this.auth, username, password));
-  }
 
   signUp(name, email, password) {
     return from(
@@ -43,18 +31,20 @@ export class AuthService {
     ).pipe(switchMap(({ user }) => updateProfile(user, { displayName: name })));
   }
 
-  // async signup(email, password) {
-  //   await this.firebaseAuth
-  //     .createUserWithEmailAndPassword(email, password)
-  //     .then((response) => {
-  //       this.isLoggedIn = true;
-  //       localStorage.setItem('user', JSON.stringify(response.user));
-  //     });
-  // }
+  login(username, password) {
+    return from(signInWithEmailAndPassword(this.auth, username, password));
+  }
 
   logOut() {
-    this.firebaseAuth.signOut();
-    localStorage.removeItem('user');
+    this.auth.signOut().then(() => {
+      this.toast
+        .observe({
+          success: 'Logged out successfully',
+          loading: 'Logging out ...',
+          error: 'There was an error',
+        })
+          this.router.navigate(['']);
+    });
   }
 
   GoogleAuth() {

@@ -9,6 +9,15 @@
           <div></div>
           Name
         </div>
+        <button mat-button [matMenuTriggerFor]="userMenu">
+          <mat-icon>account_circle</mat-icon>
+          <!-- {{user.displayName}} -->
+          <mat-icon>expand_more</mat-icon>
+        </button>
+
+        <mat-menu #userMenu="matMenu">
+          <button mat-menu-item (click)="authService.logOut()">Logout</button>
+        </mat-menu>
       </div>
 
       <ng-container *ngIf="chat$ | async as chat">

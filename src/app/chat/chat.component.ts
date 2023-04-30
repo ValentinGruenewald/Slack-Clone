@@ -4,6 +4,7 @@ import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/models/chat.class';
 import { Observable } from 'rxjs';
 import { Message } from 'src/models/message.class';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-chat',
@@ -18,7 +19,8 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
-    private firestore: AngularFirestore
+    private firestore: AngularFirestore,
+    public authService: AuthService,
   ) {}
 
   ngOnInit(): void {
@@ -59,7 +61,7 @@ export class ChatComponent implements OnInit {
   }
 
   createGroupChat(name) {
-    let chat = new Chat;
+    let chat = new Chat();
     chat.groupchat = true;
     chat.chatName = name;
     chat.userIds = [this.currentUserId];

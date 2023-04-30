@@ -24,7 +24,8 @@ import { AngularFireModule } from '@angular/fire/compat';
 import { AuthService } from './services/auth.service';
 import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
-//import { HotToastModule } from '@ngneat/hot-toast';
+import { HotToastModule } from '@ngneat/hot-toast';
+import { MatMenuModule } from '@angular/material/menu';
 
 @NgModule({
   declarations: [
@@ -50,7 +51,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     MatSidenavModule,
     MatIconModule,
     ReactiveFormsModule,
-    //HotToastModule.forRoot(),
+    HotToastModule.forRoot(),
+    MatMenuModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

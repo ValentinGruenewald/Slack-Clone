@@ -3,13 +3,24 @@ import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { ChatComponent } from './chat/chat.component';
 import { SignupComponent } from './signup/signup.component';
+import {
+  canActivate,
+  redirectUnauthorizedTo,
+  redirectLoggedInTo,
+} from '@angular/fire/auth-guard';
+
+const redirectToLogin = () => redirectUnauthorizedTo(['']);
+const redirectToHome = () => redirectLoggedInTo(['client']);
 
 const routes: Routes = [
-  { path: '', component: LoginComponent },
-  { path: 'client', component: ChatComponent },
-  { path: 'client/:id', component: ChatComponent },
-  { path: 'signup', component: SignupComponent },
-
+  { path: '', component: LoginComponent, ...canActivate(redirectToHome) },
+  { path: 'client', component: ChatComponent, ...canActivate(redirectToLogin) },
+  { path: 'client/:id', component: ChatComponent,...canActivate(redirectToLogin) },
+  {
+    path: 'signup',
+    component: SignupComponent,
+    ...canActivate(redirectToHome),
+  },
 ];
 
 @NgModule({
