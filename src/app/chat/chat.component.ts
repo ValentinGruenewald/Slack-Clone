@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/models/chat.class';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import { Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
 
@@ -16,11 +16,12 @@ export class ChatComponent implements OnInit {
   chat$: Observable<Chat>;
   allUsers;
   currentUserId: string = 'QM1Lb5uyABUDZrgz180W';
+  @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
 
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
-    public authService: AuthService,
+    public authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -43,7 +44,18 @@ export class ChatComponent implements OnInit {
     return this.firestore
       .collection('chats')
       .doc(this.chatId)
-      .valueChanges() as Observable<Chat>;
+      .valueChanges()
+      .pipe(
+        tap(() =>
+          setTimeout(
+            () =>
+              Array.from(document.querySelectorAll('.chat-message'))
+                .slice(-1)[0]
+                .scrollIntoView(),
+            0
+          )
+        )
+      ) as Observable<Chat>;
   }
 
   sendMessage(message: string, chat: Chat) {

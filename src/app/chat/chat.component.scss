@@ -4,19 +4,26 @@
 }
 
 .header {
-  padding-inline: 16px;
+  position: fixed;
+  top: 0;
   display: flex;
   justify-content: space-between;
   align-items: center;
   min-height: 56px;
   border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
   width: 100%;
+  background-color: white;
+  z-index: 5;
+}
+
+.current-user {
+  margin-right: 16px;
 }
 
 .personal-information {
   padding: 3px;
   border-radius: 4px;
-  padding-right: 12px;
+  margin-left: 16px;
   display: flex;
   align-items: center;
   font-size: 18px;
@@ -42,9 +49,10 @@
 }
 
 .text-input {
-  width: 100%;
-  position: absolute;
+  position: fixed;
   bottom: 0;
+  background-color: white;
+  width: 83%;
 
   div {
     margin: 16px;
@@ -58,6 +66,7 @@
       border: none;
       width: 100%;
       font-size: 16px;
+
 
       &:focus {
         outline: none;
@@ -81,6 +90,13 @@
       }
     }
   }
+}
+
+.all-messages-container {
+  height: calc(100vh - 92px - 57px);
+  position: relative;
+  top: 57px;
+  overflow: auto;
 }
 
 .chat-message {

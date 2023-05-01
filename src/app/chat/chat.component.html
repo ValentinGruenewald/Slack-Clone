@@ -3,13 +3,13 @@
     <app-sidenav></app-sidenav>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="chat">
+    <div class="chat" >
       <div class="header">
         <div class="personal-information">
           <div></div>
           Name
         </div>
-        <button mat-button [matMenuTriggerFor]="userMenu">
+        <button mat-button [matMenuTriggerFor]="userMenu" class="current-user">
           <mat-icon>account_circle</mat-icon>
           <!-- {{user.displayName}} -->
           <mat-icon>expand_more</mat-icon>
@@ -20,23 +20,25 @@
         </mat-menu>
       </div>
 
-      <ng-container *ngIf="chat$ | async as chat">
-        <div class="main-content" *ngFor="let message of chat.messages">
-          <div class="chat-message">
-            <img />
-            <div class="chat-message-text">
-              <div class="message-header">
-                <p class="message-name">
-                  <b>{{ findUser(message.userId).name }}</b>
-                </p>
-                <p class="message-time">{{ message.createdAt }} Uhr</p>
+      <ng-container *ngIf="chat$ | async as chat" >
+        <div class="all-messages-container" #chat>
+          <div class="main-content" *ngFor="let message of chat.messages">
+            <div class="chat-message">
+              <img />
+              <div class="chat-message-text">
+                <div class="message-header">
+                  <p class="message-name">
+                    <b>{{ findUser(message.userId).name }}</b>
+                  </p>
+                  <p class="message-time">{{ message.createdAt }} Uhr</p>
+                </div>
+                <p class="message-text">{{ message.message }}</p>
               </div>
-              <p class="message-text">{{ message.message }}</p>
             </div>
           </div>
         </div>
 
-        <div class="text-input">
+        <div class="text-input" >
           <div>
             <input type="text" #message placeholder="Message" />
             <button (click)="sendMessage(message.value, chat)">
