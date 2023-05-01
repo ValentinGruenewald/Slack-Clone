@@ -51,7 +51,10 @@ export class SignupComponent implements OnInit {
     private router: Router
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+    
+   console.log( this.signUpForm.value.name)
+  }
 
   submit() {
     if (!this.signUpForm) {

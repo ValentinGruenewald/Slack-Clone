@@ -3,6 +3,7 @@ import { AuthService } from '../services/auth.service';
 import {
   FormControl,
   FormGroup,
+  NonNullableFormBuilder,
   Validators,
 } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -14,10 +15,12 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-  loginForm = new FormGroup({
-    email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required]),
-  });
+
+  loginForm = this.fb.group({
+    email: ['', [Validators.required, Validators.email]],
+    password : ['',Validators.required]
+  })
+
 
   email = this.loginForm.get('email');
   password = this.loginForm.get('password');
@@ -25,13 +28,15 @@ export class LoginComponent implements OnInit {
   constructor(
     public authService: AuthService,
     public router: Router,
-    private toast: HotToastService
+    private toast: HotToastService,
+    private fb: NonNullableFormBuilder
   ) {}
 
-  ngOnInit() {}
+  ngOnInit() {
+}
 
   submit() {
-    if (!this.loginForm.valid) {
+    if (!this.loginForm.valid){
       return;
     }
 
