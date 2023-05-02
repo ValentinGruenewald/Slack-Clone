@@ -5,7 +5,8 @@
       *ngIf="chat.groupchat && checkIfUserIsInChat(chat.userIds)"
       [routerLink]="['/client/' + chat.customIdName]"
     >
-      {{ chat.chatName }}
+    <img [src]="'./assets/img/lock.png'" alt="" />
+    {{ chat.chatName }}
     </li>
   </div>
   <div class="direct-chats">
@@ -14,6 +15,7 @@
         *ngIf="!chat.groupchat && checkIfUserIsInChat(chat.userIds)"
         [routerLink]="['/client/' + chat.customIdName]"
       >
+        <img [src]="'./assets/img/image-placeholder.png'" alt="" />
         {{ showDirectChatName(chat.userIds) }}
       </li>
     </div>

@@ -122,4 +122,12 @@ export class ChatComponent implements OnInit {
       (user) => user.customIdName === currentUserId
     )[0].name;
   }
+
+  showChatImg(groupchat) {
+    if (groupchat == true) {
+      return './assets/img/lock_black.png';
+    } else {
+      return './assets/img/image-placeholder.png';
+    }
+  }
 }

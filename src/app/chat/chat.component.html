@@ -7,7 +7,8 @@
       <ng-container *ngIf="chat$ | async as chat">
         <div class="header">
           <div class="personal-information">
-            <div></div>
+            <img [src]="showChatImg(chat.groupchat)" />
+            
             {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
           </div>
           <button
@@ -35,7 +36,7 @@
         <div class="all-messages-container" #chat>
           <div class="main-content" *ngFor="let message of chat.messages">
             <div class="chat-message">
-              <img />
+              <img src="./assets/img/image-placeholder.png"/>
               <div class="chat-message-text">
                 <div class="message-header">
                   <p class="message-name">

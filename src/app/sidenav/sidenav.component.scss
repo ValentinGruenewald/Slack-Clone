@@ -23,6 +23,15 @@ ul {
     cursor: pointer;
     color: #c7b2ca;
 
+    img,
+    mat-icon {
+      height: 24px;
+      border-radius: 6px;
+      margin-right: 6px !important;
+
+      font-variation-settings: "FILL" 0, "wght" 400, "GRAD" 0, "opsz" 48;
+    }
+
     mat-icon {
       margin-right: 16px;
     }
