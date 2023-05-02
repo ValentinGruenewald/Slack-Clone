@@ -51,7 +51,7 @@ export class ChatComponent implements OnInit {
             () =>
               Array.from(document.querySelectorAll('.chat-message'))
                 .slice(-1)[0]
-                .scrollIntoView(),
+                ?.scrollIntoView(),
             0
           )
         )
