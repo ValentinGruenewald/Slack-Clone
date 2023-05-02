@@ -11,7 +11,7 @@
   align-items: center;
   min-height: 56px;
   border-bottom: 1px solid rgba($color: #000000, $alpha: 0.1);
-  width: 100%;
+  width: calc(100% - 250px);
   background-color: white;
   z-index: 5;
 }
@@ -19,7 +19,7 @@
 .current-user {
   margin-right: 16px;
 
-  img{
+  img {
     height: 40px;
     border-radius: 100%;
     margin-right: 8px;
@@ -58,7 +58,7 @@
   position: fixed;
   bottom: 0;
   background-color: white;
-  width: 83%;
+  width: calc(100% - 250px);
 
   div {
     margin: 16px;
@@ -72,7 +72,6 @@
       border: none;
       width: 100%;
       font-size: 16px;
-
 
       &:focus {
         outline: none;

@@ -3,27 +3,35 @@
     <app-sidenav></app-sidenav>
   </mat-drawer>
   <mat-drawer-content>
-    <div class="chat" >
-      <div class="header">
-        <div class="personal-information">
-          <div></div>
-          
+    <div class="chat">
+      <ng-container *ngIf="chat$ | async as chat">
+        <div class="header">
+          <div class="personal-information">
+            <div></div>
+            {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
+          </div>
+          <button
+            *ngIf="authService.currentUser$ | async as user"
+            mat-button
+            [matMenuTriggerFor]="userMenu"
+            class="current-user"
+          >
+            <img
+              [src]="user.photoURL ?? './assets/img/image-placeholder.png'"
+              alt=""
+            />
+            {{ showCurrentUserName(currentUserId) }}
+            <mat-icon>expand_more</mat-icon>
+          </button>
+
+          <mat-menu #userMenu="matMenu">
+            <button mat-menu-item (click)="authService.logOut()">Logout</button>
+            <button mat-menu-item routerLink="/profile">Edit Profile</button>
+          </mat-menu>
         </div>
-        <button *ngIf="authService.currentUser$ | async as user" mat-button [matMenuTriggerFor]="userMenu" class="current-user">
-          <img [src]="user.photoURL ?? './assets/img/image-placeholder.png'" alt="">
-name
-          <mat-icon>expand_more</mat-icon>
-        </button>
+      </ng-container>
 
-        <mat-menu #userMenu="matMenu">
-          <button mat-menu-item (click)="authService.logOut()">Logout</button>
-          <button mat-menu-item routerLink="/profile">Edit Profile</button>
-        </mat-menu>
-
-        ss
-      </div>
-
-      <ng-container *ngIf="chat$ | async as chat" >
+      <ng-container *ngIf="chat$ | async as chat">
         <div class="all-messages-container" #chat>
           <div class="main-content" *ngFor="let message of chat.messages">
             <div class="chat-message">
@@ -41,7 +49,7 @@ name
           </div>
         </div>
 
-        <div class="text-input" >
+        <div class="text-input">
           <div>
             <input type="text" #message placeholder="Message" />
             <button (click)="sendMessage(message.value, chat)">

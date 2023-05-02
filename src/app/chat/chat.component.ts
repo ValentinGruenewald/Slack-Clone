@@ -84,4 +84,25 @@ export class ChatComponent implements OnInit {
         console.log('Adding chat finished' + result);
       });
   }
+
+  showChatName(chatName: string, groupchat: boolean, userIds: string[]) {
+    if (groupchat == true) {
+      return chatName;
+    } else {
+      if (userIds[0] == this.currentUserId) {
+        return this.allUsers.filter(
+          (user) => user.customIdName === userIds[1]
+        )[0].name;
+      } else {
+        return this.allUsers.filter(
+          (user) => user.customIdName === userIds[0]
+        )[0].name;
+      }
+    }
+  }
+
+  showCurrentUserName(currentUserId) {
+    return this.allUsers.filter(
+      (user) => user.customIdName === currentUserId)[0].name;
+  }
 }

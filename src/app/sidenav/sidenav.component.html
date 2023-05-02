@@ -1,15 +1,21 @@
 <div class="title">Your Company</div>
-<ul *ngFor="let chat of allChats">
-  <li
-    *ngIf="chat.groupchat && checkIfUserIsInChat(chat.userIds)"
-    [routerLink]="['/client/' + chat.customIdName]"
-  >
-    {{ chat.chatName }}
-  </li>
-  <li
-    *ngIf="!chat.groupchat && checkIfUserIsInChat(chat.userIds)"
-    [routerLink]="['/client/' + chat.customIdName]"
-  >
-    {{ showDirectChatName(chat.userIds) }}
-  </li>
+<ul>
+  <div *ngFor="let chat of allChats">
+    <li
+      *ngIf="chat.groupchat && checkIfUserIsInChat(chat.userIds)"
+      [routerLink]="['/client/' + chat.customIdName]"
+    >
+      {{ chat.chatName }}
+    </li>
+  </div>
+  <div class="direct-chats">
+    <div *ngFor="let chat of allChats">
+      <li
+        *ngIf="!chat.groupchat && checkIfUserIsInChat(chat.userIds)"
+        [routerLink]="['/client/' + chat.customIdName]"
+      >
+        {{ showDirectChatName(chat.userIds) }}
+      </li>
+    </div>
+  </div>
 </ul>
