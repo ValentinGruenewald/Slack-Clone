@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute } from '@angular/router';
 import { Chat } from 'src/models/chat.class';
 import { Observable, tap } from 'rxjs';
-import { Message } from 'src/models/message.class';
+import { JsonMessage, Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -77,6 +77,13 @@ export class ChatComponent implements OnInit {
     chat.groupchat = true;
     chat.chatName = name;
     chat.userIds = [this.currentUserId];
+    let firstMessage: JsonMessage = {
+      createdAt: '19:59',
+      message: 'testmessage1',
+      userId: 'vs2DTr1B3vqplKnTZx7O',
+    };
+    chat.messages = [firstMessage];
+
     this.firestore
       .collection('chats')
       .add(chat.toJSON())
@@ -103,6 +110,7 @@ export class ChatComponent implements OnInit {
 
   showCurrentUserName(currentUserId) {
     return this.allUsers.filter(
-      (user) => user.customIdName === currentUserId)[0].name;
+      (user) => user.customIdName === currentUserId
+    )[0].name;
   }
 }
