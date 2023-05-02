@@ -51,7 +51,13 @@
 
         <div class="text-input">
           <div>
-            <input type="text" #message placeholder="Message" />
+            <input
+              (keydown.enter)="sendMessage(message.value, chat)"
+              type="text"
+              #message
+              placeholder="Message"
+              [value]="messageValue"
+            />
             <button (click)="sendMessage(message.value, chat)">
               <mat-icon>chevron_right</mat-icon>
             </button>

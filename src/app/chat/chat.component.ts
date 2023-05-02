@@ -16,6 +16,8 @@ export class ChatComponent implements OnInit {
   chat$: Observable<Chat>;
   allUsers;
   currentUserId: string = 'QM1Lb5uyABUDZrgz180W';
+  messageValue: string = '';
+
   @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
 
   constructor(
@@ -59,13 +61,17 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(message: string, chat: Chat) {
-    let sentMessage = new Message({
-      userId: this.currentUserId,
-      message: message,
-    });
-    console.log(sentMessage);
-    chat.messages.push(sentMessage.toJSON());
-    this.firestore.collection('chats').doc(this.chatId).update(chat);
+    if (message == '') {
+    } else {
+      let sentMessage = new Message({
+        userId: this.currentUserId,
+        message: message,
+      });
+      console.log(sentMessage);
+      chat.messages.push(sentMessage.toJSON());
+      this.firestore.collection('chats').doc(this.chatId).update(chat);
+      this.messageValue = null;
+    }
   }
 
   findUser(id: string) {
@@ -78,8 +84,11 @@ export class ChatComponent implements OnInit {
     chat.chatName = name;
     chat.userIds = [this.currentUserId];
     let firstMessage: JsonMessage = {
-      createdAt: '19:59',
-      message: 'testmessage1',
+      createdAt: Intl.DateTimeFormat('de-DE', {
+        dateStyle: 'short',
+        timeStyle: 'short',
+      }).format(new Date()),
+      message: 'Welcome to the groupchat ' + chat.chatName + '.',
       userId: 'vs2DTr1B3vqplKnTZx7O',
     };
     chat.messages = [firstMessage];
