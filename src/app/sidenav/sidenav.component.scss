@@ -42,6 +42,12 @@ ul {
   }
 }
 
+.add-channel {
+  mat-icon {
+    background-color: rgba($color: #ffffff, $alpha: 0.08);
+  }
+}
+
 .direct-chats {
   margin-top: 16px;
 }

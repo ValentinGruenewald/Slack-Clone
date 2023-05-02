@@ -28,6 +28,9 @@ import { HotToastModule } from '@ngneat/hot-toast';
 import { MatMenuModule } from '@angular/material/menu';
 import { ProfileComponent } from './profile/profile.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
+import { FormsModule } from '@angular/forms';
+import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
+import { MatDialogModule } from '@angular/material/dialog';
 
 @NgModule({
   declarations: [
@@ -37,6 +40,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     ChatComponent,
     SignupComponent,
     ProfileComponent,
+    DialogAddChannelComponent,
   ],
   imports: [
     BrowserModule,
@@ -57,6 +61,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
     ReactiveFormsModule,
     HotToastModule.forRoot(),
     MatMenuModule,
+    FormsModule,
+    MatDialogModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

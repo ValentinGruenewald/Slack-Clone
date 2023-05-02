@@ -5,10 +5,15 @@
       *ngIf="chat.groupchat && checkIfUserIsInChat(chat.userIds)"
       [routerLink]="['/client/' + chat.customIdName]"
     >
-    <img [src]="'./assets/img/lock.png'" alt="" />
-    {{ chat.chatName }}
+      <img [src]="'./assets/img/lock.png'" alt="" />
+      {{ chat.chatName }}
     </li>
   </div>
+  <li class="add-channel"
+  (click)="openDialog()">
+    <mat-icon>add</mat-icon>
+    Add channel
+  </li>
   <div class="direct-chats">
     <div *ngFor="let chat of allChats">
       <li

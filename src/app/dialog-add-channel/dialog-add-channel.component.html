@@ -1,0 +1,46 @@
+<mat-progress-bar *ngIf="" mode="indeterminate"></mat-progress-bar>
+
+<h1 mat-dialog-title>Add channel</h1>
+<div mat-dialog-content>
+  <div>
+    <mat-form-field class="mr-16 mt-4" appearance="outline">
+      <mat-label>First name</mat-label>
+      <!-- <input [disabled]="" [(ngModel)]="user.firstName" matInput /> -->
+    </mat-form-field>
+
+    <mat-form-field class="mt-4" appearance="outline">
+      <mat-label>Last name</mat-label>
+      <!-- <input [disabled]="" [(ngModel)]="user.lastName" matInput /> -->
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="mt-4" appearance="outline" class="full-width">
+      <mat-label>E-Mail</mat-label>
+      <!-- <input [disabled]="" [(ngModel)]="user.email" matInput /> -->
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field appearance="fill" class="example-form-field full-width">
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="mt-4" appearance="outline" class="full-width">
+      <mat-label>Street + House No.</mat-label>
+      <!-- <input [disabled]="" [(ngModel)]="user.street" matInput /> -->
+    </mat-form-field>
+  </div>
+  <div>
+    <mat-form-field class="mt-4 mr-16" appearance="outline">
+      <mat-label>Zip code</mat-label>
+      <!-- <input [disabled]="" [(ngModel)]="user.zipCode" matInput /> -->
+    </mat-form-field>
+    <mat-form-field class="mt-4" appearance="outline">
+      <mat-label>City</mat-label>
+      <!-- <input [disabled]="" [(ngModel)]="user.city" matInput /> -->
+    </mat-form-field>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="this.dialogRef.close()">Cancel</button>
+  <button (click)="saveChannel()" mat-button cdkFocusInitial>Save</button>
+</div>

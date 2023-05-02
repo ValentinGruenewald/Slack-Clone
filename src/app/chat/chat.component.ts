@@ -5,6 +5,7 @@ import { Chat } from 'src/models/chat.class';
 import { Observable, tap } from 'rxjs';
 import { JsonMessage, Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-chat',
@@ -17,16 +18,22 @@ export class ChatComponent implements OnInit {
   allUsers;
   currentUserId: string = 'QM1Lb5uyABUDZrgz180W';
   messageValue: string = '';
+  myForm: FormGroup;
 
   @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
 
   constructor(
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
-    public authService: AuthService
+    public authService: AuthService,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
+    this.myForm = this.formBuilder.group({
+      myControl: ['', Validators.required],
+    });
+
     this.route.paramMap.subscribe((paramMap) => {
       this.chatId = paramMap.get('id');
       this.getChat();
@@ -70,7 +77,7 @@ export class ChatComponent implements OnInit {
       console.log(sentMessage);
       chat.messages.push(sentMessage.toJSON());
       this.firestore.collection('chats').doc(this.chatId).update(chat);
-      this.messageValue = null;
+      this.messageValue = '';
     }
   }
 

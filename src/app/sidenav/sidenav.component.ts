@@ -1,8 +1,9 @@
 import { Component, OnInit } from '@angular/core';
-import { User } from '@angular/fire/auth';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { findIndex } from 'rxjs';
 import { Chat } from 'src/models/chat.class';
+import { MatDialog } from '@angular/material/dialog';
+import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
+
 
 @Component({
   selector: 'app-sidenav',
@@ -10,7 +11,7 @@ import { Chat } from 'src/models/chat.class';
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-  constructor(private firestore: AngularFirestore) {}
+  constructor(private firestore: AngularFirestore, public dialog: MatDialog) {}
 
   chat = new Chat();
   allChats: Chat[] = [];
@@ -45,5 +46,9 @@ export class SidenavComponent implements OnInit {
 
   checkIfUserIsInChat(userIds: string[] | undefined) {
     return userIds?.some((id) => id === this.currentUserId);
+  }
+
+  openDialog() {
+    this.dialog.open(DialogAddChannelComponent);
   }
 }
