@@ -7,4 +7,4 @@ export interface UserProfile {
   photoURL?:string;
   phoneNumber?:string;
   address?:string;
-}
+}   

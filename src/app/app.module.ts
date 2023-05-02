@@ -26,6 +26,8 @@ import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { MatMenuModule } from '@angular/material/menu';
+import { ProfileComponent } from './profile/profile.component';
+import { getStorage, provideStorage } from '@angular/fire/storage';
 
 @NgModule({
   declarations: [
@@ -34,6 +36,7 @@ import { MatMenuModule } from '@angular/material/menu';
     SidenavComponent,
     ChatComponent,
     SignupComponent,
+    ProfileComponent,
   ],
   imports: [
     BrowserModule,
@@ -42,6 +45,7 @@ import { MatMenuModule } from '@angular/material/menu';
     provideAuth(() => getAuth()),
     provideDatabase(() => getDatabase()),
     provideFirestore(() => getFirestore()),
+    provideStorage(() => getStorage()),
     AngularFireModule.initializeApp(environment.firebase),
     FirestoreModule,
     MatInputModule,

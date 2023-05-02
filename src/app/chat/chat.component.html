@@ -7,17 +7,20 @@
       <div class="header">
         <div class="personal-information">
           <div></div>
-          Name
+          
         </div>
-        <button mat-button [matMenuTriggerFor]="userMenu" class="current-user">
-          <mat-icon>account_circle</mat-icon>
-          <!-- {{user.displayName}} -->
+        <button *ngIf="authService.currentUser$ | async as user" mat-button [matMenuTriggerFor]="userMenu" class="current-user">
+          <img [src]="user.photoURL ?? './assets/img/image-placeholder.png'" alt="">
+name
           <mat-icon>expand_more</mat-icon>
         </button>
 
         <mat-menu #userMenu="matMenu">
           <button mat-menu-item (click)="authService.logOut()">Logout</button>
+          <button mat-menu-item routerLink="/profile">Edit Profile</button>
         </mat-menu>
+
+        ss
       </div>
 
       <ng-container *ngIf="chat$ | async as chat" >
