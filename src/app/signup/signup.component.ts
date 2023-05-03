@@ -10,6 +10,8 @@ import {
 import { AuthService } from '../services/auth.service';
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
+import { UsersService } from '../services/users.service';
+import { switchMap } from 'rxjs';
 
 export function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -48,26 +50,30 @@ export class SignupComponent implements OnInit {
   constructor(
     private authService: AuthService,
     private toast: HotToastService,
-    private router: Router
+    private router: Router,
+    private userService: UsersService
   ) {}
 
   ngOnInit() {
-    
-   console.log( this.signUpForm.value.name)
+    console.log(this.signUpForm.value.name);
   }
 
-  submit() {
-    if (!this.signUpForm) {
+   submit() {
+    const { name, email, password } = this.signUpForm.value;
+
+    if (!this.signUpForm.valid || !name || !password || !email) {
       return;
     }
 
-    const { name, email, password } = this.signUpForm.value;
     this.authService
-      .signUp(name, email, password)
+      .signUp(email, password)
       .pipe(
+        switchMap(({ user: { uid } }) =>
+          this.userService.addUser({ uid, email, displayName: name })
+        ),
         this.toast.observe({
-          success: 'Congratulation, welcome to Slack-Clone',
-          loading: 'Loading....',
+          success: 'Congrats! You are all signed up',
+          loading: 'Signing up...',
           error: ({ message }) => `${message}`,
         })
       )

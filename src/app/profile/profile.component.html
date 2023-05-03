@@ -2,12 +2,40 @@
   <div class="profile-header">
     <h1>Guten Tag</h1>
     <div class="picture-container">
+
       <img [src]="user.photoURL ?? './assets/img/image-placeholder.png'" alt="">
-          <button mat-mini-fab (click)="inputField.click()">
-            <mat-icon>edit</mat-icon>
-          </button>
+      <button mat-mini-fab (click)="inputField.click()">
+        <mat-icon>edit</mat-icon>
+      </button>
     </div>
 
     <input type="file" #inputField hidden (change)="uploadImage($event, user)">
   </div>
+
+  <form class="margin-top" [formGroup]="profileForm" (ngSubmit)="saveProfile()">
+    <div class="row full-width">
+      <mat-form-field>
+        <input type="text" matInput formControlName="firstName" placeholder="First Name" />
+      </mat-form-field>
+      <mat-form-field>
+        <input type="text" matInput formControlName="lastName" placeholder="Last Name" />
+      </mat-form-field>
+    </div>
+
+    <div class="row full-width">
+      <mat-form-field>
+        <input type="text" matInput formControlName="displayName" placeholder="Display Name" />
+      </mat-form-field>
+      <mat-form-field>
+        <input type="number" matInput formControlName="phone" placeholder="Phone" />
+      </mat-form-field>
+    </div>
+    <mat-form-field >
+      <input class="full-width" type="text" matInput formControlName="address" placeholder="Address" />
+    </mat-form-field>
+
+    <button type="submit" class="margin-top" mat-raised-button color="primary">
+      Save
+    </button>
+  </form>
 </div>

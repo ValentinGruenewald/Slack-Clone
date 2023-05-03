@@ -26,7 +26,7 @@ export class ChatComponent implements OnInit {
     private route: ActivatedRoute,
     private firestore: AngularFirestore,
     public authService: AuthService,
-    private formBuilder: FormBuilder
+    private formBuilder: FormBuilder,
   ) {}
 
   ngOnInit(): void {

@@ -23,7 +23,11 @@
     height: 40px;
     border-radius: 100%;
     margin-right: 8px;
+    object-fit: cover;
+    object-position: center;
   }
+
+
 }
 
 .personal-information {

@@ -27,10 +27,8 @@ export class AuthService {
     private toast: HotToastService
   ) {}
 
-  signUp(name, email, password) {
-    return from(
-      createUserWithEmailAndPassword(this.auth, email, password)
-    ).pipe(switchMap(({ user }) => updateProfile(user, { displayName: name })));
+  signUp(email, password) {
+    return from(createUserWithEmailAndPassword(this.auth, email, password))
   }
 
   login(username, password) {

@@ -11,17 +11,10 @@
 
             {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
           </div>
-          <button
-            *ngIf="authService.currentUser$ | async as user"
-            mat-button
-            [matMenuTriggerFor]="userMenu"
-            class="current-user"
-          >
-            <img
-              [src]="user.photoURL ?? './assets/img/image-placeholder.png'"
-              alt=""
-            />
-            {{ showCurrentUserName(currentUserId) }}
+          <button *ngIf="authService.currentUser$ | async as user" mat-button [matMenuTriggerFor]="userMenu"
+            class="current-user">
+            <img [src]="user.photoURL ?? './assets/img/image-placeholder.png'" alt="" />
+            <span>{{ (usersService.currentUserProfile$ | async)?.displayName }}</span>
             <mat-icon>expand_more</mat-icon>
           </button>
 
@@ -52,13 +45,8 @@
 
         <div class="text-input">
           <div>
-            <input
-              (keydown.enter)="sendMessage(message.value, chat)"
-              type="text"
-              #message
-              placeholder="Message"
-              [(ngModel)]="messageValue"
-            />
+            <input (keydown.enter)="sendMessage(message.value, chat)" type="text" #message placeholder="Message"
+              [(ngModel)]="messageValue" />
             <button (click)="sendMessage(message.value, chat)">
               <mat-icon>chevron_right</mat-icon>
             </button>
