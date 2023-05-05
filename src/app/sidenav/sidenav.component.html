@@ -21,7 +21,7 @@
         [routerLink]="['/client/' + chat.customIdName]"
       >
         <img [src]="'./assets/img/image-placeholder.png'" alt="" />
-        {{ showDirectChatName(chat.userIds) }}
+        {{ showDirectChatUser(chat.userIds).displayName }}
       </li>
     </div>
   </div>

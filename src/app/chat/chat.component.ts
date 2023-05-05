@@ -119,11 +119,11 @@ export class ChatComponent implements OnInit {
       if (userIds[0] == this.currentUserId) {
         return this.allUsers.filter(
           (user) => user.customIdName === userIds[1]
-        )[0].name;
+        )[0].displayName;
       } else {
         return this.allUsers.filter(
           (user) => user.customIdName === userIds[0]
-        )[0].name;
+        )[0].displayName;
       }
     }
   }

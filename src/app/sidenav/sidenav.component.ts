@@ -4,7 +4,6 @@ import { Chat } from 'src/models/chat.class';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
 
-
 @Component({
   selector: 'app-sidenav',
   templateUrl: './sidenav.component.html',
@@ -34,13 +33,15 @@ export class SidenavComponent implements OnInit {
       });
   }
 
-  showDirectChatName(userIds: string[]) {
+  showDirectChatUser(userIds: string[]) {
     if (userIds[0] == this.currentUserId) {
-      return this.allUsers.filter((user) => user.customIdName === userIds[1])[0]
-        .name;
+      return this.allUsers.filter(
+        (user) => user.customIdName === userIds[1]
+      )[0];
     } else {
-      return this.allUsers.filter((user) => user.customIdName === userIds[0])[0]
-        .name;
+      return this.allUsers.filter(
+        (user) => user.customIdName === userIds[0]
+      )[0];
     }
   }
 
