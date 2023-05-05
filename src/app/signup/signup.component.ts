@@ -12,6 +12,9 @@ import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { UsersService } from '../services/users.service';
 import { switchMap } from 'rxjs';
+import { AngularFirestore } from '@angular/fire/compat/firestore';
+import { Chat } from 'src/models/chat.class';
+import { JsonMessage } from 'src/models/message.class';
 
 export function passwordMatchValidator(): ValidatorFn {
   return (control: AbstractControl): ValidationErrors | null => {
@@ -32,6 +35,7 @@ export function passwordMatchValidator(): ValidatorFn {
   styleUrls: ['./signup.component.scss'],
 })
 export class SignupComponent implements OnInit {
+  allUsers;
   signUpForm = new FormGroup(
     {
       name: new FormControl('', Validators.required),
@@ -51,14 +55,15 @@ export class SignupComponent implements OnInit {
     private authService: AuthService,
     private toast: HotToastService,
     private router: Router,
-    private userService: UsersService
+    private userService: UsersService,
+    private firestore: AngularFirestore
   ) {}
 
   ngOnInit() {
     console.log(this.signUpForm.value.name);
   }
 
-   submit() {
+  submit() {
     const { name, email, password } = this.signUpForm.value;
 
     if (!this.signUpForm.valid || !name || !password || !email) {
@@ -80,5 +85,45 @@ export class SignupComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate(['/client']);
       });
+    this.getUsers();
+    //this.addDirectChats();
+  }
+
+  getUsers() {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'customIdName' })
+      .subscribe((changes: any) => {
+        this.allUsers = changes;
+      });
+    setTimeout(() => {
+      this.addDirectChats();
+    }, 5000);
+  }
+
+  addDirectChats() {
+    let newUser = this.allUsers[0];
+    for (let i = 1; i < this.allUsers.length; i++) {
+      let otherUser = this.allUsers[i];
+      let chat = new Chat();
+      chat.groupchat = false;
+      chat.userIds = [newUser.uid, otherUser.uid];
+      let firstMessage: JsonMessage = {
+        createdAt: Intl.DateTimeFormat('de-DE', {
+          dateStyle: 'short',
+          timeStyle: 'short',
+        }).format(new Date()),
+        message: 'Welcome to the groupchat ' + chat.chatName + '.',
+        userId: 'vs2DTr1B3vqplKnTZx7O',
+      };
+      chat.messages = [firstMessage];
+
+      this.firestore
+        .collection('chats')
+        .add(chat.toJSON())
+        .then((result: any) => {
+          console.log('Adding chat finished' + result);
+        });
+    }
   }
 }

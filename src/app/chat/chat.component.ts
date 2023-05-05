@@ -16,7 +16,7 @@ export class ChatComponent implements OnInit {
   chatId: any = '';
   chat$: Observable<Chat>;
   allUsers;
-  currentUserId: string = 'QM1Lb5uyABUDZrgz180W';
+  currentUserId: string = 'HHU8CqEirQVHQDnakP2eDXm8wNF2';
   messageValue: string = '';
   myForm: FormGroup;
 

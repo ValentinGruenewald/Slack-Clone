@@ -15,7 +15,7 @@ export class SidenavComponent implements OnInit {
   chat = new Chat();
   allChats: Chat[] = [];
   allUsers;
-  currentUserId: string = 'QM1Lb5uyABUDZrgz180W';
+  currentUserId: string = 'HHU8CqEirQVHQDnakP2eDXm8wNF2';
 
   ngOnInit(): void {
     this.firestore
@@ -31,6 +31,8 @@ export class SidenavComponent implements OnInit {
       .subscribe((changes: any) => {
         this.allChats = changes;
       });
+
+      this.currentUserId;
   }
 
   showDirectChatUser(userIds: string[]) {
