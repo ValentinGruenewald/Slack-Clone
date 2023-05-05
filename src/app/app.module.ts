@@ -31,6 +31,7 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { MatDialogModule } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @NgModule({
   declarations: [

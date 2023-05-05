@@ -1,6 +1,6 @@
 import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Chat } from 'src/models/chat.class';
 import { Observable, tap } from 'rxjs';
 import { JsonMessage, Message } from 'src/models/message.class';
@@ -24,28 +24,32 @@ export class ChatComponent implements OnInit {
 
   constructor(
     private route: ActivatedRoute,
+    private router: Router,
     private firestore: AngularFirestore,
     public authService: AuthService,
-    private formBuilder: FormBuilder,
+    private formBuilder: FormBuilder
   ) {}
 
   ngOnInit(): void {
     this.myForm = this.formBuilder.group({
       myControl: ['', Validators.required],
     });
-
     this.route.paramMap.subscribe((paramMap) => {
       this.chatId = paramMap.get('id');
-      this.getChat();
+      if (this.chatId == null) {
+        this.router.navigate(['/client/FV0OLfaDe9MkpvvH0l42']);
+      } else {
+        this.getChat();
 
-      this.firestore
-        .collection('users')
-        .valueChanges({ idField: 'customIdName' })
-        .subscribe((changes: any) => {
-          this.allUsers = changes;
-        });
+        this.firestore
+          .collection('users')
+          .valueChanges({ idField: 'customIdName' })
+          .subscribe((changes: any) => {
+            this.allUsers = changes;
+          });
 
-      this.chat$ = this.getChat();
+        this.chat$ = this.getChat();
+      }
     });
   }
 
