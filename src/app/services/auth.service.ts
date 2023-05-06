@@ -35,31 +35,28 @@ export class AuthService {
     return from(signInWithEmailAndPassword(this.auth, username, password));
   }
 
-  logOut() {
-    this.auth.signOut().then(() => {
-      this.toast.observe({
-        success: 'Logged out successfully',
-        loading: 'Logging out ...',
-        error: 'There was an error',
-      });
-      this.router.navigate(['']);
-    });
-  }
+logOut() {
+  this.auth.signOut().then(() => {
+    this.router.navigate(['']);
+    this.toast.success('You have been successfully logged out.');
+  });
+}
 
-  GoogleAuth() {
-    return this.AuthLogin(new GoogleAuthProvider());
-  }
-  // Auth logic to run auth providers
-  AuthLogin(provider) {
-    return this.firebaseAuth
-      .signInWithPopup(provider)
-      .then((result) => {
-        this.router.navigate(['/client']);
-        console.log('You have been successfully logged in!');
-      })
-      .catch((error) => {
-        console.log(error);
-      });
+GoogleAuth() {
+  return this.AuthLogin(new GoogleAuthProvider());
+}
+
+AuthLogin(provider) {
+  return this.firebaseAuth
+    .signInWithPopup(provider)
+    .then((result) => {
+      this.router.navigate(['/client']);
+      this.toast.success('You have been successfully logged in!');
+    })
+    .catch((error) => {
+      console.log(error);
+      this.toast.error('There was an error while logging in.');
+    });
   }
 
   updateProfile(profileData: Partial<UserInfo>): Observable<any> {
