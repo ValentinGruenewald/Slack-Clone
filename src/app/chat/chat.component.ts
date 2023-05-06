@@ -7,6 +7,8 @@ import { JsonMessage, Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
+import { MatDialog } from '@angular/material/dialog';
+import { ProfileComponent } from '../profile/profile.component';
 
 
 @Component({
@@ -31,7 +33,8 @@ export class ChatComponent implements OnInit {
     private firestore: AngularFirestore,
     public authService: AuthService,
     private formBuilder: FormBuilder,
-    private usersService: UsersService
+    private usersService: UsersService,
+    public dialog: MatDialog
   ) {}
 
   ngOnInit(): void {
@@ -144,5 +147,9 @@ export class ChatComponent implements OnInit {
     } else {
       return './assets/img/image-placeholder.png';
     }
+  }
+
+  openDialog() {
+    this.dialog.open(ProfileComponent);
   }
 }

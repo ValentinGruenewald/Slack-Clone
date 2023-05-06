@@ -6,7 +6,7 @@ import { FormControl, FormGroup } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { UserProfile } from 'src/models/user-profile';
-
+import { MatDialogRef } from '@angular/material/dialog';
 
 @UntilDestroy()
 @Component({
@@ -29,7 +29,8 @@ export class ProfileComponent implements OnInit {
   constructor(
     private imageUploadService: ImageUploadService,
     private toast: HotToastService,
-    private usersService: UsersService
+    private usersService: UsersService,
+    public dialogRef: MatDialogRef<ProfileComponent>
   ) {}
 
   ngOnInit(): void {
@@ -61,7 +62,7 @@ export class ProfileComponent implements OnInit {
 
   saveProfile() {
     const { uid, ...data } = this.profileForm.value;
-
+    this.dialogRef.close();
     if (!uid) {
       return;
     }
