@@ -20,8 +20,8 @@
           </button>
 
           <mat-menu #userMenu="matMenu">
-            <button mat-menu-item (click)="authService.logOut()">Logout</button>
             <button mat-menu-item routerLink="/profile">Edit Profile</button>
+            <button mat-menu-item (click)="authService.logOut()">Logout</button>
           </mat-menu>
         </div>
       </ng-container>

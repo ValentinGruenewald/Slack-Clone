@@ -13,12 +13,10 @@ import { HotToastService } from '@ngneat/hot-toast';
   styleUrls: ['./login.component.scss'],
 })
 export class LoginComponent implements OnInit {
-
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
-    password : ['',Validators.required]
-  })
-
+    password: ['', Validators.required],
+  });
 
   email = this.loginForm.get('email');
   password = this.loginForm.get('password');
@@ -30,11 +28,25 @@ export class LoginComponent implements OnInit {
     private fb: NonNullableFormBuilder
   ) {}
 
-  ngOnInit() {
-}
+  ngOnInit() {}
+
+  loginAsGuest() {
+    this.authService
+      .login('guest@example.com', 'password')
+      .pipe(
+        this.toast.observe({
+          success: 'Logged in successfully',
+          loading: 'Logging in ...',
+          error: 'There was an error',
+        })
+      )
+      .subscribe(() => {
+        this.router.navigate(['/client']);
+      });
+  }
 
   submit() {
-    if (!this.loginForm.valid){
+    if (!this.loginForm.valid) {
       return;
     }
 
