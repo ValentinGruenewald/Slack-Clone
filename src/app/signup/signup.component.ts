@@ -37,6 +37,8 @@ export function passwordMatchValidator(): ValidatorFn {
 export class SignupComponent implements OnInit {
   allUsers;
   allChats: Chat[] = [];
+  generalChat: Chat;
+
   signUpForm = new FormGroup(
     {
       name: new FormControl('', Validators.required),
@@ -120,7 +122,7 @@ export class SignupComponent implements OnInit {
           timeStyle: 'short',
         }).format(new Date()),
         message:
-          'Welcome to the private chat of' +
+          'Welcome to the private chat of ' +
           this.findUser(newUser.uid).displayName +
           ' and ' +
           this.findUser(otherUser.uid).displayName +
@@ -139,8 +141,28 @@ export class SignupComponent implements OnInit {
   }
 
   addNewUserToGeneral() {
-    let newUser = this.allUsers[0];
     this.getAllChats();
+    setTimeout(() => {
+      let allUserIds = [];
+      this.generalChat = this.findGeneralChat();
+      this.allUsers.forEach((user) => {
+        allUserIds.push(user.uid);
+      });
+      this.generalChat.userIds = allUserIds;
+      let newGeneralChat = {
+        chatName: this.generalChat.chatName,
+        groupchat: this.generalChat.groupchat,
+        userIds: this.generalChat.userIds,
+        messages: this.generalChat.messages,
+      };
+
+      this.firestore
+        .collection('chats')
+        .doc('FV0OLfaDe9MkpvvH0l42')
+        .update(newGeneralChat);
+
+      console.log('added new user to generalChat successfully');
+    }, 5000);
   }
 
   getAllChats() {
@@ -150,12 +172,11 @@ export class SignupComponent implements OnInit {
       .subscribe((changes: any) => {
         this.allChats = changes;
       });
-    setTimeout(() => {
-      console.log('general chatname is: ' + this.findGeneralChat().chatName);
-    }, 5000);
   }
 
   findGeneralChat() {
-    return this.allChats.filter((chat) => chat.chatName == 'general')[0];
+    return this.allChats.filter(
+      (chat) => chat.chatName == 'general'
+    )[0] as Chat;
   }
 }

@@ -3,6 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { Chat } from 'src/models/chat.class';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
+import { UsersService } from '../services/users.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -10,12 +11,16 @@ import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-chan
   styleUrls: ['./sidenav.component.scss'],
 })
 export class SidenavComponent implements OnInit {
-  constructor(private firestore: AngularFirestore, public dialog: MatDialog) {}
+  constructor(
+    private firestore: AngularFirestore,
+    public dialog: MatDialog,
+    private usersService: UsersService
+  ) {}
 
   chat = new Chat();
   allChats: Chat[] = [];
   allUsers;
-  currentUserId: string = 'P76fCIET0HgzNwEC4p4don3oYfP2';
+  currentUserId: string;
 
   ngOnInit(): void {
     this.firestore
@@ -32,7 +37,9 @@ export class SidenavComponent implements OnInit {
         this.allChats = changes;
       });
 
-      this.currentUserId;
+    this.usersService.currentUserProfile$.subscribe((userProfile) => {
+      this.currentUserId = userProfile.uid;
+    });
   }
 
   showDirectChatUser(userIds: string[]) {

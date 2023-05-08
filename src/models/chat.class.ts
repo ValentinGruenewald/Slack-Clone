@@ -1,4 +1,4 @@
-import { JsonMessage, Message } from "./message.class";
+import { JsonMessage } from './message.class';
 
 export class Chat {
   chatName: string;

@@ -19,7 +19,7 @@ export class ChatComponent implements OnInit {
   chatId: any = '';
   chat$: Observable<Chat>;
   allUsers;
-  currentUserId: string = 'P76fCIET0HgzNwEC4p4don3oYfP2';
+  currentUserId: string;
   messageValue: string = '';
   myForm: FormGroup;
   user$ = this.usersService.currentUserProfile$;
@@ -56,6 +56,10 @@ export class ChatComponent implements OnInit {
 
         this.chat$ = this.getChat();
       }
+    });
+
+    this.usersService.currentUserProfile$.subscribe((userProfile) => {
+      this.currentUserId = userProfile.uid;
     });
   }
 
