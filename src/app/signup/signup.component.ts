@@ -101,10 +101,15 @@ export class SignupComponent implements OnInit {
     }, 5000);
   }
 
+  findUser(id: string) {
+    return this.allUsers.filter((user) => user.customIdName === id)[0];
+  }
+
   addDirectChats() {
     let newUser = this.allUsers[0];
     for (let i = 1; i < this.allUsers.length; i++) {
       let otherUser = this.allUsers[i];
+
       let chat = new Chat();
       chat.groupchat = false;
       chat.userIds = [newUser.uid, otherUser.uid];
@@ -113,7 +118,12 @@ export class SignupComponent implements OnInit {
           dateStyle: 'short',
           timeStyle: 'short',
         }).format(new Date()),
-        message: 'Welcome to the groupchat ' + chat.chatName + '.',
+        message:
+          'Welcome to the private chat of' +
+          this.findUser(newUser.uid).displayName +
+          ' and ' +
+          this.findUser(otherUser.uid).displayName +
+          '.',
         userId: 'vs2DTr1B3vqplKnTZx7O',
       };
       chat.messages = [firstMessage];
@@ -122,7 +132,7 @@ export class SignupComponent implements OnInit {
         .collection('chats')
         .add(chat.toJSON())
         .then((result: any) => {
-          console.log('Adding chat finished' + result);
+          console.log('Adding chat finished' + i + result);
         });
     }
   }
