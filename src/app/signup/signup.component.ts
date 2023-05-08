@@ -151,7 +151,7 @@ export class SignupComponent implements OnInit {
         this.allChats = changes;
       });
     setTimeout(() => {
-      console.log('general chatname is: ' + this.findGeneralChat());
+      console.log('general chatname is: ' + this.findGeneralChat().chatName);
     }, 5000);
   }
 
