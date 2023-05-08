@@ -4,16 +4,23 @@
   </mat-drawer>
   <mat-drawer-content>
     <div class="chat">
-      <ng-container *ngIf="chat$ | async as chat" >
+      <ng-container *ngIf="chat$ | async as chat">
         <div class="header">
           <div class="personal-information">
             <img [src]="showChatImg(chat.groupchat)" />
 
             {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
           </div>
-          <button *ngIf="user$ | async as user" mat-button [matMenuTriggerFor]="userMenu"
-            class="current-user">
-            <img [src]="user.photoURL ?? './assets/img/image-placeholder.png'" alt="" />
+          <button
+            *ngIf="user$ | async as user"
+            mat-button
+            [matMenuTriggerFor]="userMenu"
+            class="current-user"
+          >
+            <img
+              [src]="user.photoURL ?? './assets/img/image-placeholder.png'"
+              alt=""
+            />
             <span>{{ user.displayName }}</span>
             <mat-icon>expand_more</mat-icon>
           </button>
@@ -29,7 +36,13 @@
         <div class="all-messages-container" #chat>
           <div class="main-content" *ngFor="let message of chat.messages">
             <div class="chat-message">
-              <img src="./assets/img/image-placeholder.png" />
+              <img
+                [src]="
+                  findUser(message.userId).photoURL ??
+                  './assets/img/image-placeholder.png'
+                "
+                alt=""
+              />
               <div class="chat-message-text">
                 <div class="message-header">
                   <p class="message-name">
@@ -45,8 +58,13 @@
 
         <div class="text-input">
           <div>
-            <input (keydown.enter)="sendMessage(message.value, chat)" type="text" #message placeholder="Message"
-              [(ngModel)]="messageValue" />
+            <input
+              (keydown.enter)="sendMessage(message.value, chat)"
+              type="text"
+              #message
+              placeholder="Message"
+              [(ngModel)]="messageValue"
+            />
             <button (click)="sendMessage(message.value, chat)">
               <mat-icon>chevron_right</mat-icon>
             </button>

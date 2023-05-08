@@ -36,6 +36,7 @@ export function passwordMatchValidator(): ValidatorFn {
 })
 export class SignupComponent implements OnInit {
   allUsers;
+  allChats: Chat[] = [];
   signUpForm = new FormGroup(
     {
       name: new FormControl('', Validators.required),
@@ -86,7 +87,10 @@ export class SignupComponent implements OnInit {
         this.router.navigate(['/client']);
       });
     this.getUsers();
-    //this.addDirectChats();
+    setTimeout(() => {
+      this.addDirectChats();
+      this.addNewUserToGeneral();
+    }, 5000);
   }
 
   getUsers() {
@@ -96,9 +100,6 @@ export class SignupComponent implements OnInit {
       .subscribe((changes: any) => {
         this.allUsers = changes;
       });
-    setTimeout(() => {
-      this.addDirectChats();
-    }, 5000);
   }
 
   findUser(id: string) {
@@ -135,5 +136,26 @@ export class SignupComponent implements OnInit {
           console.log('Adding chat finished' + i + result);
         });
     }
+  }
+
+  addNewUserToGeneral() {
+    let newUser = this.allUsers[0];
+    this.getAllChats();
+  }
+
+  getAllChats() {
+    this.firestore
+      .collection('chats')
+      .valueChanges({ idField: 'customIdName' })
+      .subscribe((changes: any) => {
+        this.allChats = changes;
+      });
+    setTimeout(() => {
+      console.log('general chatname is: ' + this.findGeneralChat());
+    }, 5000);
+  }
+
+  findGeneralChat() {
+    return this.allChats.filter((chat) => chat.chatName == 'general')[0];
   }
 }

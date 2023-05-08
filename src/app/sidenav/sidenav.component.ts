@@ -15,7 +15,7 @@ export class SidenavComponent implements OnInit {
   chat = new Chat();
   allChats: Chat[] = [];
   allUsers;
-  currentUserId: string = 'HHU8CqEirQVHQDnakP2eDXm8wNF2';
+  currentUserId: string = 'P76fCIET0HgzNwEC4p4don3oYfP2';
 
   ngOnInit(): void {
     this.firestore

@@ -10,7 +10,6 @@ import { UsersService } from '../services/users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileComponent } from '../profile/profile.component';
 
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -20,7 +19,7 @@ export class ChatComponent implements OnInit {
   chatId: any = '';
   chat$: Observable<Chat>;
   allUsers;
-  currentUserId: string = 'HHU8CqEirQVHQDnakP2eDXm8wNF2';
+  currentUserId: string = 'P76fCIET0HgzNwEC4p4don3oYfP2';
   messageValue: string = '';
   myForm: FormGroup;
   user$ = this.usersService.currentUserProfile$;
