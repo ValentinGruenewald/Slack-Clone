@@ -100,29 +100,6 @@ export class ChatComponent implements OnInit {
     return this.allUsers.filter((user) => user.customIdName === id)[0];
   }
 
-  createGroupChat(name) {
-    let chat = new Chat();
-    chat.groupchat = true;
-    chat.chatName = name;
-    chat.userIds = [this.currentUserId];
-    let firstMessage: JsonMessage = {
-      createdAt: Intl.DateTimeFormat('de-DE', {
-        dateStyle: 'short',
-        timeStyle: 'short',
-      }).format(new Date()),
-      message: 'Welcome to the groupchat ' + chat.chatName + '.',
-      userId: 'vs2DTr1B3vqplKnTZx7O',
-    };
-    chat.messages = [firstMessage];
-
-    this.firestore
-      .collection('chats')
-      .add(chat.toJSON())
-      .then((result: any) => {
-        console.log('Adding chat finished' + result);
-      });
-  }
-
   showChatName(chatName: string, groupchat: boolean, userIds: string[]) {
     if (groupchat == true) {
       return chatName;

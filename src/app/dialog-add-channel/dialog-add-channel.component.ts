@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Chat } from 'src/models/chat.class';
 import { UsersService } from '../services/users.service';
-import { set } from '@angular/fire/database';
+import { JsonMessage } from 'src/models/message.class';
 
 @Component({
   selector: 'app-dialog-add-channel',
@@ -28,7 +28,6 @@ export class DialogAddChannelComponent implements OnInit {
       this.currentUserId = userProfile.uid;
     });
     setTimeout(() => {
-      console.log(this.allUsers);
       this.deleteCurrentUserFromAllUsers();
     }, 100);
   }
@@ -43,9 +42,7 @@ export class DialogAddChannelComponent implements OnInit {
   }
 
   deleteCurrentUserFromAllUsers() {
-    console.log(this.findUserNumber(this.currentUserId));
     this.allUsers.splice(this.findUserNumber(this.currentUserId), 1);
-    console.log(this.allUsers);
   }
 
   findUserNumber(currentId: string) {
@@ -53,12 +50,33 @@ export class DialogAddChannelComponent implements OnInit {
   }
 
   saveChat() {
+    this.addChatConfigurations();
     this.firestore
       .collection('chats')
       .add(this.chat.toJSON())
       .then((result: any) => {
-        console.log('Adding user finished' + result);
+        console.log('Adding chat finished' + result);
         this.dialogRef.close();
       });
+  }
+
+  addChatConfigurations() {
+    this.chat.groupchat = true;
+    let firstMessage: JsonMessage = {
+      createdAt: Intl.DateTimeFormat('de-DE', {
+        dateStyle: 'short',
+        timeStyle: 'short',
+      }).format(new Date()),
+      message: 'Welcome to the groupchat ' + this.chat.chatName + '.',
+      userId: 'vs2DTr1B3vqplKnTZx7O',
+    };
+    this.chat.messages = [firstMessage];
+    this.addUsersToChat();
+  }
+
+  addUsersToChat() {
+    for (let i = 0; i < this.allUsers.length; i++) {
+      console.log('hehe');
+    }
   }
 }
