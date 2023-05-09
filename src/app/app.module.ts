@@ -31,8 +31,8 @@ import { getStorage, provideStorage } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { MatDialogModule } from '@angular/material/dialog';
-import { Router } from '@angular/router';
 import { DialogUserInfoComponent } from './dialog-user-info/dialog-user-info.component';
+import { MatCheckboxModule } from '@angular/material/checkbox';
 
 @NgModule({
   declarations: [
@@ -66,6 +66,7 @@ import { DialogUserInfoComponent } from './dialog-user-info/dialog-user-info.com
     MatMenuModule,
     FormsModule,
     MatDialogModule,
+    MatCheckboxModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],
