@@ -144,11 +144,19 @@ export class ChatComponent implements OnInit {
     )[0].name;
   }
 
-  showChatImg(groupchat) {
+  showChatImg(groupchat: boolean, userIds: string[]) {
     if (groupchat == true) {
       return './assets/img/lock_black.png';
     } else {
-      return './assets/img/image-placeholder.png';
+      if (userIds[0] == this.currentUserId) {
+        return this.allUsers.filter(
+          (user) => user.customIdName === userIds[1]
+        )[0].photoURL;
+      } else {
+        return this.allUsers.filter(
+          (user) => user.customIdName === userIds[0]
+        )[0].photoURL;
+      }
     }
   }
 

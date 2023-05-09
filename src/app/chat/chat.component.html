@@ -7,7 +7,7 @@
       <ng-container *ngIf="chat$ | async as chat">
         <div class="header">
           <div class="personal-information">
-            <img [src]="showChatImg(chat.groupchat)" />
+            <img [src]="showChatImg(chat.groupchat, chat.userIds)" />
 
             {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
           </div>
