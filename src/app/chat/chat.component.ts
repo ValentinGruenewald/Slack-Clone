@@ -9,6 +9,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { ProfileComponent } from '../profile/profile.component';
+import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.component';
 
 @Component({
   selector: 'app-chat',
@@ -160,7 +161,11 @@ export class ChatComponent implements OnInit {
     }
   }
 
-  openDialog() {
+  openEditDialog() {
     this.dialog.open(ProfileComponent);
+  }
+
+  openUserInfoDialog() {
+    this.dialog.open(DialogUserInfoComponent);
   }
 }

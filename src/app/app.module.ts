@@ -32,6 +32,7 @@ import { FormsModule } from '@angular/forms';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { Router } from '@angular/router';
+import { DialogUserInfoComponent } from './dialog-user-info/dialog-user-info.component';
 
 @NgModule({
   declarations: [
@@ -42,6 +43,7 @@ import { Router } from '@angular/router';
     SignupComponent,
     ProfileComponent,
     DialogAddChannelComponent,
+    DialogUserInfoComponent,
   ],
   imports: [
     BrowserModule,
