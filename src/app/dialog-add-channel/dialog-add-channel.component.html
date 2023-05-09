@@ -3,13 +3,13 @@
   <div>
     <mat-form-field class="mr-16 mt-4" appearance="outline">
       <mat-label>Chat name</mat-label>
-      <input [disabled]="" matInput />
+      <input [disabled]="" matInput [(ngModel)]="chat.chatName" />
     </mat-form-field>
   </div>
-  <div>
-    <mat-checkbox class="example-margin"
-      >Checked</mat-checkbox
-    >
+  <div class="select-users-container">
+    <mat-checkbox class="example-margin" *ngFor="let user of allUsers">{{
+      user.displayName
+    }}</mat-checkbox>
   </div>
 </div>
 <div mat-dialog-actions>

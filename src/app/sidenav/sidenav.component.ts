@@ -55,7 +55,7 @@ export class SidenavComponent implements OnInit {
   }
 
   checkIfUserIsInChat(userIds: string[] | undefined) {
-    return userIds?.some((id) => id === this.currentUserId);
+   // return userIds?.some((id) => id === this.currentUserId);
   }
 
   openDialog() {
