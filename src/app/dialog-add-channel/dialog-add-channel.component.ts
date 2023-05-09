@@ -20,10 +20,10 @@ export class DialogAddChannelComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  saveChannel() {
+  saveChat() {
 
     this.firestore
-      .collection('users')
+      .collection('chats')
       .add(this.user.toJSON())
       .then((result: any) => {
         this.loading = false;
