@@ -12,7 +12,8 @@ import { JsonMessage } from 'src/models/message.class';
 })
 export class DialogAddChannelComponent implements OnInit {
   chat = new Chat();
-  allUsers = [];
+  allNonAddedUsers = [];
+  allAddedUsers = [];
   currentUserId: string;
 
   constructor(
@@ -37,16 +38,16 @@ export class DialogAddChannelComponent implements OnInit {
       .collection('users')
       .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
-        this.allUsers = changes;
+        this.allNonAddedUsers = changes;
       });
   }
 
   deleteCurrentUserFromAllUsers() {
-    this.allUsers.splice(this.findUserNumber(this.currentUserId), 1);
+    this.allNonAddedUsers.splice(this.findUserNumber(this.currentUserId), 1);
   }
 
   findUserNumber(currentId: string) {
-    return this.allUsers.map((e) => e.uid).indexOf(currentId);
+    return this.allNonAddedUsers.map((e) => e.uid).indexOf(currentId);
   }
 
   saveChat() {
@@ -75,7 +76,7 @@ export class DialogAddChannelComponent implements OnInit {
   }
 
   addUsersToChat() {
-    for (let i = 0; i < this.allUsers.length; i++) {
+    for (let i = 0; i < this.allNonAddedUsers.length; i++) {
       console.log('hehe');
     }
   }

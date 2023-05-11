@@ -9,7 +9,13 @@
   <div class="select-users-container">
     <mat-checkbox
       class="example-margin"
-      *ngFor="let user of allUsers; let i = index"
+      *ngFor="let user of allNonAddedUsers"
+      [attr.data-index]="i"
+      >{{ user.displayName }}</mat-checkbox
+    >
+    <mat-checkbox
+      class="example-margin"
+      *ngFor="let user of allAddedUsers"
       [attr.data-index]="i"
       >{{ user.displayName }}</mat-checkbox
     >
