@@ -7,7 +7,12 @@
       <ng-container *ngIf="chat$ | async as chat">
         <div class="header">
           <div class="personal-information">
-            <img [src]="showChatImg(chat.groupchat, chat.userIds)" />
+            <img
+              [src]="
+                showChatImg(chat.groupchat, chat.userIds) ??
+                './assets/img/image-placeholder.png'
+              "
+            />
 
             {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
           </div>
@@ -26,7 +31,9 @@
           </button>
 
           <mat-menu #userMenu="matMenu">
-            <button mat-menu-item (click)="openEditDialog()">Edit Profile</button>
+            <button mat-menu-item (click)="openEditDialog()">
+              Edit Profile
+            </button>
             <button mat-menu-item (click)="authService.logOut()">Logout</button>
           </mat-menu>
         </div>
@@ -46,7 +53,9 @@
               <div class="chat-message-text">
                 <div class="message-header">
                   <p class="message-name">
-                    <b (click)="openUserInfoDialog(findUser(message.userId))">{{ findUser(message.userId).displayName }}</b>
+                    <b (click)="openUserInfoDialog(findUser(message.userId))">{{
+                      findUser(message.userId).displayName
+                    }}</b>
                   </p>
                   <p class="message-time">{{ message.createdAt }} Uhr</p>
                 </div>
