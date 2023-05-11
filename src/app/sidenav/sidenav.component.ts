@@ -59,6 +59,8 @@ export class SidenavComponent implements OnInit {
   }
 
   openDialog() {
-    this.dialog.open(DialogAddChannelComponent);
+    setTimeout(() => {
+      this.dialog.open(DialogAddChannelComponent);
+    }, 100);
   }
 }

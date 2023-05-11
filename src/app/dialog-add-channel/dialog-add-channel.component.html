@@ -6,19 +6,23 @@
       <input [disabled]="" matInput [(ngModel)]="chat.chatName" />
     </mat-form-field>
   </div>
+  <b class="color-black">Who should be in this chat?</b>
   <div class="select-users-container">
-    <mat-checkbox
-      class="example-margin"
-      *ngFor="let user of allNonAddedUsers"
-      [attr.data-index]="i"
-      >{{ user.displayName }}</mat-checkbox
+    <button
+      mat-button
+      *ngFor="let user of allNonAddedUsers; let i = index"
+      (click)="addUserToChat(i)"
     >
-    <mat-checkbox
-      class="example-margin"
-      *ngFor="let user of allAddedUsers"
-      [attr.data-index]="i"
-      >{{ user.displayName }}</mat-checkbox
+      {{ user.displayName }}
+    </button>
+    <button
+      mat-raised-button
+      color="primary"
+      *ngFor="let user of allAddedUsers; let i = index"
+      (click)="deleteUserFromChat(i)"
     >
+      {{ user.displayName }}
+    </button>
   </div>
 </div>
 <div mat-dialog-actions>

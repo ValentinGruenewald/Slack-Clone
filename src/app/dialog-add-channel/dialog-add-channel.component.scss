@@ -2,9 +2,17 @@
   display: flex;
   flex-wrap: wrap;
   width: 500px;
+
+  button {
+    margin-right: 6px;
+  }
 }
 
 mat-form-field {
   margin-top: 10px;
   padding-top: 10px;
+}
+
+.color-black {
+  color: black;
 }
