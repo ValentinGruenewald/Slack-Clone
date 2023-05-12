@@ -1,17 +1,21 @@
-import { Component } from '@angular/core';
-import { MatDialogRef } from '@angular/material/dialog';
+import { Component, Inject, OnInit } from '@angular/core';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-dialog-user-info',
   templateUrl: './dialog-user-info.component.html',
   styleUrls: ['./dialog-user-info.component.scss'],
 })
-export class DialogUserInfoComponent {
-  allUsers;
-  
-  constructor(public dialogRef: MatDialogRef<DialogUserInfoComponent>) {}
+export class DialogUserInfoComponent implements OnInit{
 
-  findUser(id: string) {
-    return this.allUsers.filter((user) => user.customIdName === id)[0];
-  }
+ngOnInit(): void {
+    console.log(this.data)
+}
+
+  constructor(
+    public dialogRef: MatDialogRef<DialogUserInfoComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {}
+
+
 }

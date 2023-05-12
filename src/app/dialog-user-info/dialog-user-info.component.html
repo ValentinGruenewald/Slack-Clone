@@ -1,10 +1,12 @@
 <h1 mat-dialog-title>Add channel</h1>
 <div class="content" mat-dialog-content>
-  <img src="./assets/img/image-placeholder.png" alt="">
-  <span>Nickname: Bobby </span>
-  <span>Vorname: Boubkir</span>
-  <span>Nachname: Benamar</span>
-  <span>Email: test@test.de</span>
+  <img [src]="data.photoURL || './assets/img/image-placeholder.png'" alt="">
+  <span>Nickname: {{data.displayName}} </span>
+  <span>Vorname: {{data.firstName}}</span>
+  <span>Nachname: {{data.lastName}}</span>
+  <span>Email: {{data.email}}</span>
+  <span>Phone: {{data.phoneNumber}}</span>
+  <span>Adress: {{data.address}}</span>
 
 </div>
 <div mat-dialog-actions>

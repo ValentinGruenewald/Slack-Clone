@@ -142,7 +142,9 @@ export class ChatComponent implements OnInit {
     this.dialog.open(ProfileComponent);
   }
 
-  openUserInfoDialog() {
-    this.dialog.open(DialogUserInfoComponent);
+  openUserInfoDialog(user: string): void {
+    const dialogRef = this.dialog.open(DialogUserInfoComponent, {
+      data: user,
+    });
   }
 }
