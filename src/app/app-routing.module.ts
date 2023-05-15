@@ -8,7 +8,8 @@ import {
   redirectUnauthorizedTo,
   redirectLoggedInTo,
 } from '@angular/fire/auth-guard';
-import { ProfileComponent } from './profile/profile.component';
+import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
+
 
 const redirectToLogin = () => redirectUnauthorizedTo(['']);
 const redirectToHome = () => redirectLoggedInTo(['client']);
@@ -17,7 +18,7 @@ const routes: Routes = [
   { path: '', component: LoginComponent, ...canActivate(redirectToHome) },
   { path: 'client', component: ChatComponent, ...canActivate(redirectToLogin) },
   { path: 'client/:id', component: ChatComponent,...canActivate(redirectToLogin) },
-  { path: 'profile', component: ProfileComponent, ...canActivate(redirectToLogin) },
+  { path: 'profile', component: DialogEditUserComponent, ...canActivate(redirectToLogin) },
   {
     path: 'signup',
     component: SignupComponent,

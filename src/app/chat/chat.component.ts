@@ -8,7 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { MatDialog } from '@angular/material/dialog';
-import { ProfileComponent } from '../profile/profile.component';
+import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.component';
 
 @Component({
@@ -139,7 +139,7 @@ export class ChatComponent implements OnInit {
   }
 
   openEditDialog() {
-    this.dialog.open(ProfileComponent);
+    this.dialog.open(DialogEditUserComponent);
   }
 
   openUserInfoDialog(user: string): void {

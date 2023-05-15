@@ -8,13 +8,14 @@ import { UntilDestroy, untilDestroyed } from '@ngneat/until-destroy';
 import { UserProfile } from 'src/models/user-profile';
 import { MatDialogRef } from '@angular/material/dialog';
 
+
 @UntilDestroy()
 @Component({
-  selector: 'app-profile',
-  templateUrl: './profile.component.html',
-  styleUrls: ['./profile.component.scss'],
+  selector: 'app-dialog-edit-user',
+  templateUrl: './dialog-edit-user.component.html',
+  styleUrls: ['./dialog-edit-user.component.scss'],
 })
-export class ProfileComponent implements OnInit {
+export class DialogEditUserComponent implements OnInit {
   user$ = this.usersService.currentUserProfile$;
 
   profileForm = new FormGroup({
@@ -30,7 +31,7 @@ export class ProfileComponent implements OnInit {
     private imageUploadService: ImageUploadService,
     private toast: HotToastService,
     private usersService: UsersService,
-    public dialogRef: MatDialogRef<ProfileComponent>
+    public dialogRef: MatDialogRef<DialogEditUserComponent>
   ) {}
 
   ngOnInit(): void {

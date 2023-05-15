@@ -26,13 +26,13 @@ import { SignupComponent } from './signup/signup.component';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HotToastModule } from '@ngneat/hot-toast';
 import { MatMenuModule } from '@angular/material/menu';
-import { ProfileComponent } from './profile/profile.component';
 import { getStorage, provideStorage } from '@angular/fire/storage';
 import { FormsModule } from '@angular/forms';
 import { DialogAddChannelComponent } from './dialog-add-channel/dialog-add-channel.component';
 import { MatDialogModule } from '@angular/material/dialog';
 import { DialogUserInfoComponent } from './dialog-user-info/dialog-user-info.component';
 import { MatCheckboxModule } from '@angular/material/checkbox';
+import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 
 @NgModule({
   declarations: [
@@ -41,9 +41,9 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
     SidenavComponent,
     ChatComponent,
     SignupComponent,
-    ProfileComponent,
     DialogAddChannelComponent,
     DialogUserInfoComponent,
+    DialogEditUserComponent,
   ],
   imports: [
     BrowserModule,
