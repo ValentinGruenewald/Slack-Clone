@@ -20,15 +20,24 @@
   margin-right: 16px;
 
   img {
-    height: 45px;
-    width: 45px;
+    height: 30px;
+    width: 30px;
     border-radius: 100%;
     margin-right: 8px;
     object-fit: cover;
     object-position: center;
   }
 
+  .flex-container {
+    display: flex;
+    align-items: center;
+  }
 
+  .center-content {
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
 }
 
 .personal-information {
