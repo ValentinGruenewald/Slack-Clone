@@ -1,14 +1,18 @@
-<h1 mat-dialog-title>Add channel</h1>
-<div class="content" mat-dialog-content>
-  <img [src]="data.photoURL || './assets/img/image-placeholder.png'" alt="">
-  <span *ngIf="data.displayName">Nickname: {{data.displayName}} </span>
-  <span *ngIf="data.firstName">Vorname: {{data.firstName}}</span>
-  <span *ngIf="data.lastName">Nachname: {{data.lastName}}</span>
-  <span *ngIf="data.email" >Email: {{data.email}}</span>
-  <span *ngIf="data.phoneNumber" >Phone: {{data.phoneNumber}}</span>
-  <span *ngIf="data.address" >Adress: {{data.address}}</span>
-
-</div>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Close</button>
+<div class="content">
+  <h1 mat-dialog-title>User Informations</h1>
+  <div class="infoContent" mat-dialog-content>
+    <div class="user-info">
+      <img [src]="data.photoURL || './assets/img/image-placeholder.png'" alt="" class="user-avatar">
+      <div class="user-details">
+        <span class="display-name" *ngIf="data.displayName">Nickname: {{data.displayName}} </span>
+        <span class="name" *ngIf="data.firstName || data.lastName">Name: {{data.firstName}} {{data.lastName}}</span>
+        <span class="email" *ngIf="data.email">Email: {{data.email}}</span>
+        <span class="phone" *ngIf="data.phoneNumber">Phone: {{data.phoneNumber}}</span>
+        <span class="address" *ngIf="data.address">Address: {{data.address}}</span>
+      </div>
+    </div>
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button mat-dialog-close>Close</button>
+  </div>
 </div>
