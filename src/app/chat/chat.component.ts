@@ -44,7 +44,7 @@ export class ChatComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       this.chatId = paramMap.get('id');
       if (this.chatId == null) {
-        this.router.navigate(['/client/FV0OLfaDe9MkpvvH0l42']);
+        this.router.navigate(['/client/07ZN7o3Ene7HyL5fwkNp']);
       } else {
         this.getChat();
         this.getUsers();
