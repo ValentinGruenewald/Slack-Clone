@@ -169,9 +169,8 @@ export class SignupComponent implements OnInit {
 
       this.firestore
         .collection('chats')
-        .doc('FV0OLfaDe9MkpvvH0l42')
+        .doc('07ZN7o3Ene7HyL5fwkNp')
         .update(newGeneralChat);
-
       console.log('added new user to generalChat successfully');
     }, 5000);
   }
