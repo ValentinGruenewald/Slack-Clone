@@ -123,56 +123,75 @@ export class SignupComponent implements OnInit {
       let otherUser = this.allUsers[i];
       if (otherUser.uid == this.currentUserId) {
       } else {
-        let chat = new Chat();
-        chat.groupchat = false;
-        chat.userIds = [newUser.uid, otherUser.uid];
-        let firstMessage: JsonMessage = {
-          createdAt: Intl.DateTimeFormat('de-DE', {
-            dateStyle: 'short',
-            timeStyle: 'short',
-          }).format(new Date()),
-          message:
-            'Welcome to the private chat of ' +
-            this.findUser(newUser.uid).displayName +
-            ' and ' +
-            this.findUser(otherUser.uid).displayName +
-            '.',
-          userId: 'vs2DTr1B3vqplKnTZx7O',
-        };
-        chat.messages = [firstMessage];
-
-        this.firestore
-          .collection('chats')
-          .add(chat.toJSON())
-          .then((result: any) => {
-            console.log('Adding chat finished' + i + result);
-          });
+        this.createNewDirectChat(newUser, otherUser, i);
       }
     }
+  }
+
+  createNewDirectChat(newUser, otherUser, i) {
+    let chat = new Chat();
+    chat.groupchat = false;
+    chat.userIds = [newUser.uid, otherUser.uid];
+    chat.messages = this.addFirstMessageInDirectChat(chat, newUser, otherUser);
+    this.addDirectChatToFirebase(chat, i);
+  }
+
+  addFirstMessageInDirectChat(chat, newUser, otherUser) {
+    let firstMessage: JsonMessage = {
+      createdAt: Intl.DateTimeFormat('de-DE', {
+        dateStyle: 'short',
+        timeStyle: 'short',
+      }).format(new Date()),
+      message:
+        'Welcome to the private chat of ' +
+        this.findUser(newUser.uid).displayName +
+        ' and ' +
+        this.findUser(otherUser.uid).displayName +
+        '.',
+      userId: 'vs2DTr1B3vqplKnTZx7O',
+    };
+    chat.messages = [firstMessage];
+    return chat.messages;
+  }
+
+  addDirectChatToFirebase(chat, i) {
+    this.firestore
+      .collection('chats')
+      .add(chat.toJSON())
+      .then((result: any) => {
+        console.log('Adding chat finished' + i + result);
+      });
   }
 
   addNewUserToGeneral() {
     this.getAllChats();
     setTimeout(() => {
-      let allUserIds = [];
-      this.generalChat = this.findGeneralChat();
-      this.allUsers.forEach((user) => {
-        allUserIds.push(user.uid);
-      });
-      this.generalChat.userIds = allUserIds;
+      this.addAllUserIdsToGeneralChat();
       let newGeneralChat = {
         chatName: this.generalChat.chatName,
         groupchat: this.generalChat.groupchat,
         userIds: this.generalChat.userIds,
         messages: this.generalChat.messages,
       };
-
-      this.firestore
-        .collection('chats')
-        .doc('07ZN7o3Ene7HyL5fwkNp')
-        .update(newGeneralChat);
-      console.log('added new user to generalChat successfully');
+      this.addNewUserToFireStore(newGeneralChat);
     }, 5000);
+  }
+
+  addAllUserIdsToGeneralChat() {
+    let allUserIds = [];
+    this.generalChat = this.findGeneralChat();
+    this.allUsers.forEach((user) => {
+      allUserIds.push(user.uid);
+    });
+    this.generalChat.userIds = allUserIds;
+  }
+
+  addNewUserToFireStore(newGeneralChat) {
+    this.firestore
+      .collection('chats')
+      .doc('07ZN7o3Ene7HyL5fwkNp')
+      .update(newGeneralChat);
+    console.log('added new user to generalChat successfully');
   }
 
   getAllChats() {
