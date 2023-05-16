@@ -39,10 +39,14 @@ export class SidenavComponent implements OnInit {
         this.allChats = changes;
       });
     setTimeout(() => {
-      this.usersService.currentUserProfile$.subscribe((userProfile) => {
-        this.currentUserId = userProfile.uid;
-      });
+      this.getChurrentUser();
     }, 1000);
+  }
+
+  getChurrentUser() {
+    this.usersService.currentUserProfile$.subscribe((userProfile) => {
+      this.currentUserId = userProfile.uid;
+    });
   }
 
   showDirectChatUser(userIds: string[]) {

@@ -47,21 +47,12 @@ export class ChatComponent implements OnInit {
         this.router.navigate(['/client/FV0OLfaDe9MkpvvH0l42']);
       } else {
         this.getChat();
-
-        this.firestore
-          .collection('users')
-          .valueChanges({ idField: 'customIdName' })
-          .subscribe((changes: any) => {
-            this.allUsers = changes;
-          });
-
+        this.getUsers();
         this.chat$ = this.getChat();
       }
     });
     setTimeout(() => {
-      this.usersService.currentUserProfile$.subscribe((userProfile) => {
-        this.currentUserId = userProfile.uid;
-      });
+      this.getCurrentUser();
     }, 1000);
   }
 
@@ -81,6 +72,21 @@ export class ChatComponent implements OnInit {
           )
         )
       ) as Observable<Chat>;
+  }
+
+  getUsers() {
+    this.firestore
+      .collection('users')
+      .valueChanges({ idField: 'customIdName' })
+      .subscribe((changes: any) => {
+        this.allUsers = changes;
+      });
+  }
+
+  getCurrentUser() {
+    this.usersService.currentUserProfile$.subscribe((userProfile) => {
+      this.currentUserId = userProfile.uid;
+    });
   }
 
   sendMessage(message: string, chat: Chat) {
