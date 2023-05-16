@@ -38,6 +38,7 @@ export class SignupComponent implements OnInit {
   allUsers;
   allChats: Chat[] = [];
   generalChat: Chat;
+  currentUserId: string;
 
   signUpForm = new FormGroup(
     {
@@ -88,14 +89,20 @@ export class SignupComponent implements OnInit {
       .subscribe(() => {
         this.router.navigate(['/client']);
       });
-    this.getUsers();
     setTimeout(() => {
-      this.addDirectChats();
-      this.addNewUserToGeneral();
-    }, 5000);
+      this.getUsers();
+      setTimeout(() => {
+        this.addDirectChats();
+        this.addNewUserToGeneral();
+      }, 5000);
+    }, 1000);
   }
 
   getUsers() {
+    this.userService.currentUserProfile$.subscribe((userProfile) => {
+      this.currentUserId = userProfile.uid;
+    });
+
     this.firestore
       .collection('users')
       .valueChanges({ idField: 'customIdName' })
@@ -109,34 +116,38 @@ export class SignupComponent implements OnInit {
   }
 
   addDirectChats() {
-    let newUser = this.allUsers[0];
-    for (let i = 1; i < this.allUsers.length; i++) {
+    let newUser = this.allUsers.filter(
+      (user) => user.uid === this.currentUserId
+    )[0];
+    for (let i = 0; i < this.allUsers.length; i++) {
       let otherUser = this.allUsers[i];
+      if (otherUser.uid == this.currentUserId) {
+      } else {
+        let chat = new Chat();
+        chat.groupchat = false;
+        chat.userIds = [newUser.uid, otherUser.uid];
+        let firstMessage: JsonMessage = {
+          createdAt: Intl.DateTimeFormat('de-DE', {
+            dateStyle: 'short',
+            timeStyle: 'short',
+          }).format(new Date()),
+          message:
+            'Welcome to the private chat of ' +
+            this.findUser(newUser.uid).displayName +
+            ' and ' +
+            this.findUser(otherUser.uid).displayName +
+            '.',
+          userId: 'vs2DTr1B3vqplKnTZx7O',
+        };
+        chat.messages = [firstMessage];
 
-      let chat = new Chat();
-      chat.groupchat = false;
-      chat.userIds = [newUser.uid, otherUser.uid];
-      let firstMessage: JsonMessage = {
-        createdAt: Intl.DateTimeFormat('de-DE', {
-          dateStyle: 'short',
-          timeStyle: 'short',
-        }).format(new Date()),
-        message:
-          'Welcome to the private chat of ' +
-          this.findUser(newUser.uid).displayName +
-          ' and ' +
-          this.findUser(otherUser.uid).displayName +
-          '.',
-        userId: 'vs2DTr1B3vqplKnTZx7O',
-      };
-      chat.messages = [firstMessage];
-
-      this.firestore
-        .collection('chats')
-        .add(chat.toJSON())
-        .then((result: any) => {
-          console.log('Adding chat finished' + i + result);
-        });
+        this.firestore
+          .collection('chats')
+          .add(chat.toJSON())
+          .then((result: any) => {
+            console.log('Adding chat finished' + i + result);
+          });
+      }
     }
   }
 

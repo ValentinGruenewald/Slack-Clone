@@ -58,10 +58,11 @@ export class ChatComponent implements OnInit {
         this.chat$ = this.getChat();
       }
     });
-
-    this.usersService.currentUserProfile$.subscribe((userProfile) => {
-      this.currentUserId = userProfile.uid;
-    });
+    setTimeout(() => {
+      this.usersService.currentUserProfile$.subscribe((userProfile) => {
+        this.currentUserId = userProfile.uid;
+      });
+    }, 1000);
   }
 
   getChat() {

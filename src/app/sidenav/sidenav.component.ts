@@ -4,6 +4,7 @@ import { Chat } from 'src/models/chat.class';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
 import { UsersService } from '../services/users.service';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -14,7 +15,8 @@ export class SidenavComponent implements OnInit {
   constructor(
     private firestore: AngularFirestore,
     public dialog: MatDialog,
-    private usersService: UsersService
+    private usersService: UsersService,
+    public authService: AuthService
   ) {}
 
   chat = new Chat();
@@ -36,10 +38,11 @@ export class SidenavComponent implements OnInit {
       .subscribe((changes: any) => {
         this.allChats = changes;
       });
-
-    this.usersService.currentUserProfile$.subscribe((userProfile) => {
-      this.currentUserId = userProfile.uid;
-    });
+    setTimeout(() => {
+      this.usersService.currentUserProfile$.subscribe((userProfile) => {
+        this.currentUserId = userProfile.uid;
+      });
+    }, 1000);
   }
 
   showDirectChatUser(userIds: string[]) {

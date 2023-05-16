@@ -9,8 +9,7 @@
       {{ chat.chatName }}
     </li>
   </div>
-  <li class="add-channel"
-  (click)="openDialog()">
+  <li class="add-channel" (click)="openDialog()">
     <mat-icon>add</mat-icon>
     Add channel
   </li>
@@ -20,7 +19,13 @@
         *ngIf="!chat.groupchat && checkIfUserIsInChat(chat.userIds)"
         [routerLink]="['/client/' + chat.customIdName]"
       >
-        <img [src]="showDirectChatUser(chat.userIds).photoURL ?? './assets/img/image-placeholder.png'" alt="" />
+        <img
+          [src]="
+            showDirectChatUser(chat.userIds).photoURL ??
+            './assets/img/image-placeholder.png'
+          "
+          alt=""
+        />
         {{ showDirectChatUser(chat.userIds).displayName }}
       </li>
     </div>
