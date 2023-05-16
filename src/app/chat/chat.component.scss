@@ -107,12 +107,13 @@
       align-items: center;
       padding: 1px;
       border-radius: 4px;
+      cursor: pointer;
 
       background-color: white;
       color: lightgray;
 
       &:hover {
-        background-color: #158567;
+        background-color: #3f0f40;
         color: white;
       }
     }
