@@ -16,3 +16,9 @@ mat-form-field {
 .color-black {
   color: black;
 }
+
+@media (max-width: 750px) {
+  .select-users-container {
+    width: 250px;
+  }
+}
