@@ -54,3 +54,29 @@ ul {
 .direct-chats {
   margin-top: 16px;
 }
+
+@media (max-width: 600px) {
+  li {
+    font-size: 10px;
+  }
+}
+
+@media (max-width: 450px) {
+  li {
+    font-size: 6px;
+    margin-inline: 4px !important;
+    padding-left: 8px !important;
+    padding-right: 4px !important;
+    height: 20px !important;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    img,
+    mat-icon {
+      width: 12px !important;
+      height: 12px !important;
+      border-radius: 2px !important;
+    }
+  }
+}

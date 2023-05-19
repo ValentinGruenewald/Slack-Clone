@@ -7,19 +7,29 @@
       <ng-container *ngIf="chat$ | async as chat">
         <div class="header">
           <div class="personal-information">
-            <img [src]="
+            <img
+              [src]="
                 showChatImg(chat.groupchat, chat.userIds) ??
                 './assets/img/image-placeholder.png'
-              " />
+              "
+            />
 
             {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
           </div>
 
-          <button *ngIf="user$ | async as user" mat-button [matMenuTriggerFor]="userMenu" class="current-user">
+          <button
+            *ngIf="user$ | async as user"
+            mat-button
+            [matMenuTriggerFor]="userMenu"
+            class="current-user"
+          >
             <div class="flex-container">
               <div class="center-content">
-                <img [src]="user.photoURL ?? './assets/img/image-placeholder.png'" alt="" />
-                <span>{{ user.displayName }}</span>
+                <img
+                  [src]="user.photoURL ?? './assets/img/image-placeholder.png'"
+                  alt=""
+                />
+                <span class="current-user-name">{{ user.displayName }}</span>
               </div>
               <mat-icon>expand_more</mat-icon>
             </div>
@@ -38,15 +48,19 @@
         <div class="all-messages-container" #chat>
           <div class="main-content" *ngFor="let message of chat.messages">
             <div class="chat-message">
-              <img [src]="
+              <img
+                [src]="
                   findUser(message.userId).photoURL ??
                   './assets/img/image-placeholder.png'
-                " alt="" />
+                "
+                alt=""
+              />
               <div class="chat-message-text">
                 <div class="message-header">
                   <p class="message-name">
                     <b (click)="openUserInfoDialog(findUser(message.userId))">{{
-                      findUser(message.userId).displayName }}</b>
+                      findUser(message.userId).displayName
+                    }}</b>
                   </p>
                   <p class="message-time">{{ message.createdAt }} Uhr</p>
                 </div>
@@ -58,8 +72,13 @@
 
         <div class="text-input">
           <div>
-            <input (keydown.enter)="sendMessage(message.value, chat)" type="text" #message placeholder="Message"
-              [(ngModel)]="messageValue" />
+            <input
+              (keydown.enter)="sendMessage(message.value, chat)"
+              type="text"
+              #message
+              placeholder="Message"
+              [(ngModel)]="messageValue"
+            />
             <button (click)="sendMessage(message.value, chat)">
               <mat-icon>chevron_right</mat-icon>
             </button>

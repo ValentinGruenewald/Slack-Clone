@@ -189,3 +189,79 @@
   width: 250px;
   background-color: #3f0f40;
 }
+
+@media (max-width: 650px) {
+  .personal-information {
+    font-size: 12px;
+  }
+
+  .current-user {
+    img {
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .current-user-name {
+    font-size: 12px;
+  }
+}
+
+@media (max-width: 600px) {
+  .sidenav {
+    width: 150px;
+  }
+
+  .header {
+    width: calc(100% - 150px);
+  }
+
+  .text-input {
+    width: calc(100% - 150px);
+  }
+}
+
+@media (max-width: 450px) {
+  .sidenav {
+    width: 100px;
+  }
+
+  .header {
+    width: calc(100% - 100px);
+  }
+
+  .text-input {
+    width: calc(100% - 100px);
+  }
+
+  .personal-information {
+    font-size: 8px;
+    margin-left: 8px;
+  }
+
+  .current-user {
+    margin-right: 3px;
+  }
+
+  .current-user-name {
+    font-size: 8px;
+  }
+
+  .message-name,
+  .message-time,
+  .message-text {
+    font-size: 10px;
+  }
+
+  .chat-message {
+    padding-inline: 8px;
+    padding-top: 4px;
+    padding-bottom: 4px;
+
+    img {
+      width: 25px;
+      height: 25px;
+      border-radius: 4px;
+    }
+  }
+}
