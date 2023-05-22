@@ -63,7 +63,6 @@ export class DialogAddChannelComponent implements OnInit {
         .collection('chats')
         .add(this.chat.toJSON())
         .then((result: any) => {
-          console.log('Adding chat finished' + result);
           this.dialogRef.close();
         });
     }

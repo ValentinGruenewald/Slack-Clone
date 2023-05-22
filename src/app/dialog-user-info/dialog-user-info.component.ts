@@ -9,7 +9,6 @@ import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 export class DialogUserInfoComponent implements OnInit{
 
 ngOnInit(): void {
-    console.log(this.data)
 }
 
   constructor(

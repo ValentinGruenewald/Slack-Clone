@@ -96,7 +96,6 @@ export class ChatComponent implements OnInit {
         userId: this.currentUserId,
         message: message,
       });
-      console.log(sentMessage);
       chat.messages.push(sentMessage.toJSON());
       this.firestore.collection('chats').doc(this.chatId).update(chat);
       this.messageValue = '';

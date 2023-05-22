@@ -64,7 +64,6 @@ export class SignupComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    console.log(this.signUpForm.value.name);
   }
 
   submit() {
@@ -159,7 +158,6 @@ export class SignupComponent implements OnInit {
       .collection('chats')
       .add(chat.toJSON())
       .then((result: any) => {
-        console.log('Adding chat finished' + i + result);
       });
   }
 
@@ -191,7 +189,6 @@ export class SignupComponent implements OnInit {
       .collection('chats')
       .doc('07ZN7o3Ene7HyL5fwkNp')
       .update(newGeneralChat);
-    console.log('added new user to generalChat successfully');
   }
 
   getAllChats() {
