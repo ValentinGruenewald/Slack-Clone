@@ -21,6 +21,8 @@ img {
   position: relative;
   text-align: center;
   width: 100%;
+  padding: 0;
+  margin: 0;
 }
 
 .picture-container {
@@ -42,15 +44,33 @@ form {
   display: flex;
   flex-direction: column;
   justify-content: center;
+  padding: 24px;
 }
 
 .row {
   display: flex;
   gap: 16px;
   justify-content: center;
+
+  @media (max-width: 650px) {
+    flex-wrap: wrap;
+  }
 }
 
-.bg{
+.bg {
   background-color: #3f0f40;
   color: white;
+}
+
+.justify-content-end {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.full-width {
+  width: 100%;
+}
+
+.mat-mdc-dialog-content.mdc-dialog__content {
+  padding: 0 !important;
 }
