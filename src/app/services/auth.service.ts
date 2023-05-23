@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { GoogleAuthProvider } from 'firebase/auth';
 import { AngularFireAuth } from '@angular/fire/compat/auth';
-import { Observable, from, map, of, switchMap } from 'rxjs';
+import { Observable, from } from 'rxjs';
 import {
   Auth,
   authState,
@@ -11,7 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { UserProfile } from 'src/models/user-profile';
-import { Firestore, collection, doc, getDoc, getDocs, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -63,31 +63,13 @@ export class AuthService {
         this.router.navigate(['/client']);
         this.toast.success('You have been successfully logged in!');
       })
-      .catch((error) => {
-        console.log(error);
+      .catch(() => {
         this.toast.error('There was an error while logging in.');
       });
   }
 
   addUser(user: UserProfile): Observable<any> {
-    return this.checkUserExistenceByUid(user.uid).pipe(
-      switchMap((exists) => {
-        if (!exists) {
-          const ref = doc(this.firestore, 'users', user.uid);
-          return from(setDoc(ref, user));
-        } else {
-          return of(null);
-        }
-      })
-    );
-  }
-
-  checkUserExistenceByUid(uid: string): Observable<boolean> {
-    const userRef = doc(this.firestore, 'users', uid);
-    return from(getDoc(userRef)).pipe(
-      map((docSnapshot) => {
-        return docSnapshot.exists();
-      })
-    );
+    const ref = doc(this.firestore, 'users', user?.uid);
+    return from(setDoc(ref, user));
   }
 }
