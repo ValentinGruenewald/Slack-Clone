@@ -11,7 +11,7 @@ import {
 import { Router } from '@angular/router';
 import { HotToastService } from '@ngneat/hot-toast';
 import { UserProfile } from 'src/models/user-profile';
-import { Firestore, doc, setDoc } from '@angular/fire/firestore';
+import { Firestore, doc, getDoc, setDoc } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root',
@@ -70,6 +70,14 @@ export class AuthService {
 
   addUser(user: UserProfile): Observable<any> {
     const ref = doc(this.firestore, 'users', user?.uid);
-    return from(setDoc(ref, user));
+    return from(
+      getDoc(ref).then((docSnapshot) => {
+        if (docSnapshot.exists()) {
+          return null;
+        } else {
+          return setDoc(ref, user);
+        }
+      })
+    );
   }
 }
