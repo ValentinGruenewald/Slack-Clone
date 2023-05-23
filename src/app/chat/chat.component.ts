@@ -24,6 +24,7 @@ export class ChatComponent implements OnInit {
   messageValue: string = '';
   myForm: FormGroup;
   user$ = this.usersService.currentUserProfile$;
+  isMenuOpen: boolean = false;
 
   @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
 
@@ -152,5 +153,12 @@ export class ChatComponent implements OnInit {
     const dialogRef = this.dialog.open(DialogUserInfoComponent, {
       data: user,
     });
+  }
+
+  toggleMenu() {
+    this.isMenuOpen == false
+      ? (this.isMenuOpen = true)
+      : (this.isMenuOpen = false);
+    console.log(this.isMenuOpen);
   }
 }
