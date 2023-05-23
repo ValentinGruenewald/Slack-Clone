@@ -74,7 +74,7 @@ export class ChatComponent implements OnInit {
         )
       ) as Observable<Chat>;
   }
-
+  
   getUsers() {
     this.firestore
       .collection('users')
@@ -86,7 +86,9 @@ export class ChatComponent implements OnInit {
 
   getCurrentUser() {
     this.usersService.currentUserProfile$.subscribe((userProfile) => {
-      this.currentUserId = userProfile.uid;
+      if (userProfile) {
+        this.currentUserId = userProfile.uid;
+      }
     });
   }
 
