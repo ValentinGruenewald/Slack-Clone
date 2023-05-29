@@ -161,6 +161,5 @@ export class ChatComponent implements OnInit {
     this.isMenuOpen == false
       ? (this.isMenuOpen = true)
       : (this.isMenuOpen = false);
-    console.log(this.isMenuOpen);
   }
 }
