@@ -21,12 +21,12 @@
       >
         <img
           [src]="
-            showDirectChatUser(chat.userIds).photoURL ??
+            showDirectChatUser(chat.userIds)?.photoURL ??
             './assets/img/image-placeholder.png'
           "
           alt=""
         />
-        {{ showDirectChatUser(chat.userIds).displayName }}
+        {{ showDirectChatUser(chat.userIds)?.displayName ?? "N/A" }}
       </li>
     </div>
   </div>

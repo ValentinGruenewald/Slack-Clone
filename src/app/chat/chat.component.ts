@@ -74,7 +74,7 @@ export class ChatComponent implements OnInit {
         )
       ) as Observable<Chat>;
   }
-  
+
   getUsers() {
     this.firestore
       .collection('users')
@@ -109,18 +109,18 @@ export class ChatComponent implements OnInit {
     return this.allUsers.filter((user) => user.customIdName === id)[0];
   }
 
-  showChatName(chatName: string, groupchat: boolean, userIds: string[]) {
-    if (groupchat == true) {
+  showChatName(chatName: string, groupChat: boolean, userIds: string[]) {
+    if (groupChat == true) {
       return chatName;
     } else {
       if (userIds[0] == this.currentUserId) {
         return this.allUsers.filter(
           (user) => user.customIdName === userIds[1]
-        )[0].displayName;
+        )[0]?.displayName;
       } else {
         return this.allUsers.filter(
           (user) => user.customIdName === userIds[0]
-        )[0].displayName;
+        )[0]?.displayName;
       }
     }
   }
@@ -128,7 +128,7 @@ export class ChatComponent implements OnInit {
   showCurrentUserName(currentUserId) {
     return this.allUsers.filter(
       (user) => user.customIdName === currentUserId
-    )[0].name;
+    )[0]?.name;
   }
 
   showChatImg(groupchat: boolean, userIds: string[]) {
@@ -138,11 +138,11 @@ export class ChatComponent implements OnInit {
       if (userIds[0] == this.currentUserId) {
         return this.allUsers.filter(
           (user) => user.customIdName === userIds[1]
-        )[0].photoURL;
+        )[0]?.photoURL;
       } else {
         return this.allUsers.filter(
           (user) => user.customIdName === userIds[0]
-        )[0].photoURL;
+        )[0]?.photoURL;
       }
     }
   }

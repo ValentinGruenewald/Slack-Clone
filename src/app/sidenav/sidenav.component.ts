@@ -51,15 +51,11 @@ export class SidenavComponent implements OnInit {
     });
   }
 
-  showDirectChatUser(userIds: string[]) {
-    if (userIds[0] == this.currentUserId) {
-      return this.allUsers.filter(
-        (user) => user.customIdName === userIds[1]
-      )[0];
+  showDirectChatUser([u1, u2]: [string, string]) {
+    if (u1 == this.currentUserId) {
+      return this.allUsers.filter((user) => user.customIdName === u2)[0];
     } else {
-      return this.allUsers.filter(
-        (user) => user.customIdName === userIds[0]
-      )[0];
+      return this.allUsers.filter((user) => user.customIdName === u1)[0];
     }
   }
 
