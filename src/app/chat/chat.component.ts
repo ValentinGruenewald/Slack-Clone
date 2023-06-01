@@ -25,6 +25,7 @@ export class ChatComponent implements OnInit {
   myForm: FormGroup;
   user$ = this.usersService.currentUserProfile$;
   isMenuOpen: boolean = false;
+  generalChatId = '07ZN7o3Ene7HyL5fwkNp';
 
   @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
 
@@ -45,7 +46,7 @@ export class ChatComponent implements OnInit {
     this.route.paramMap.subscribe((paramMap) => {
       this.chatId = paramMap.get('id');
       if (this.chatId == null) {
-        this.router.navigate(['/client/07ZN7o3Ene7HyL5fwkNp']);
+        this.router.navigate(['/client/' + this.generalChatId]);
       } else {
         this.getChat();
         this.getUsers();

@@ -39,6 +39,7 @@ export class SignupComponent implements OnInit {
   allChats: Chat[] = [];
   generalChat: Chat;
   currentUserId: string;
+  generalChatId = '07ZN7o3Ene7HyL5fwkNp';
 
   signUpForm = new FormGroup(
     {
@@ -63,8 +64,7 @@ export class SignupComponent implements OnInit {
     private firestore: AngularFirestore
   ) {}
 
-  ngOnInit() {
-  }
+  ngOnInit() {}
 
   submit() {
     const { name, email, password } = this.signUpForm.value;
@@ -157,8 +157,7 @@ export class SignupComponent implements OnInit {
     this.firestore
       .collection('chats')
       .add(chat.toJSON())
-      .then((result: any) => {
-      });
+      .then((result: any) => {});
   }
 
   addNewUserToGeneral() {
@@ -187,7 +186,7 @@ export class SignupComponent implements OnInit {
   addNewUserToFireStore(newGeneralChat) {
     this.firestore
       .collection('chats')
-      .doc('07ZN7o3Ene7HyL5fwkNp')
+      .doc(this.generalChatId)
       .update(newGeneralChat);
   }
 
