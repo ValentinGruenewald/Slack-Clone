@@ -10,6 +10,7 @@ import { UsersService } from '../services/users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.component';
+import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
 
 @Component({
   selector: 'app-chat',
@@ -162,5 +163,10 @@ export class ChatComponent implements OnInit {
     this.isMenuOpen == false
       ? (this.isMenuOpen = true)
       : (this.isMenuOpen = false);
+  }
+
+  openEditChatDialog() {
+    const dialog = this.dialog.open(DialogEditChannelComponent);
+    dialog.componentInstance.chat = new Chat(this.chat$);
   }
 }

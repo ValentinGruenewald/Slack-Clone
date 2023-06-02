@@ -1,13 +1,21 @@
 <mat-drawer-container class="example-container">
-  <mat-drawer opened mode="side" class="sidenav" [ngClass]="{'opened-sidenav': isMenuOpen}" (click)="toggleMenu()">
+  <mat-drawer
+    opened
+    mode="side"
+    class="sidenav"
+    [ngClass]="{ 'opened-sidenav': isMenuOpen }"
+    (click)="toggleMenu()"
+  >
     <app-sidenav></app-sidenav>
   </mat-drawer>
   <mat-drawer-content>
     <div class="chat">
       <ng-container *ngIf="chat$ | async as chat">
         <div class="header">
-          <div (click)="toggleMenu()" class="open-menu"><img src='./assets/img/menu.png'></div>
-          <div class="personal-information">
+          <div (click)="toggleMenu()" class="open-menu">
+            <img src="./assets/img/menu.png" />
+          </div>
+          <div class="chat-header" (click)="openEditChatDialog()">
             <img
               [src]="
                 showChatImg(chat.groupchat, chat.userIds) ??
@@ -16,6 +24,7 @@
             />
 
             {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
+            <img class="edit" src="./assets/img/edit.png" />
           </div>
 
           <button
