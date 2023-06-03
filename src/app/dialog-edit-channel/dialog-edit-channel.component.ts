@@ -1,6 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Chat } from 'src/models/chat.class';
 import { UsersService } from '../services/users.service';
 import { JsonMessage } from 'src/models/message.class';
@@ -11,7 +11,7 @@ import { JsonMessage } from 'src/models/message.class';
   styleUrls: ['./dialog-edit-channel.component.scss'],
 })
 export class DialogEditChannelComponent implements OnInit {
-  chat;
+  chat = this.data;
   allNonAddedUsers = [];
   allAddedUsers = [];
   currentUserId: string;
@@ -20,7 +20,9 @@ export class DialogEditChannelComponent implements OnInit {
   constructor(
     public dialogRef: MatDialogRef<DialogEditChannelComponent>,
     private firestore: AngularFirestore,
-    private usersService: UsersService
+    private usersService: UsersService,
+    public dialog: MatDialogRef<DialogEditChannelComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {

@@ -15,7 +15,7 @@
           <div (click)="toggleMenu()" class="open-menu">
             <img src="./assets/img/menu.png" />
           </div>
-          <div class="chat-header" (click)="openEditChatDialog()">
+          <div class="chat-header" (click)="openEditChannelDialog(chat)">
             <img
               [src]="
                 showChatImg(chat.groupchat, chat.userIds) ??
