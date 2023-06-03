@@ -166,6 +166,7 @@ export class ChatComponent implements OnInit {
   }
 
   openEditChannelDialog(chat:any) {
+    console.log(chat)
     const dialog = this.dialog.open(DialogEditChannelComponent,{
       data:chat,
     });

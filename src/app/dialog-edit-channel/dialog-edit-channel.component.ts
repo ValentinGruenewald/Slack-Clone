@@ -13,7 +13,7 @@ import { JsonMessage } from 'src/models/message.class';
 export class DialogEditChannelComponent implements OnInit {
   chat = this.data;
   allNonAddedUsers = [];
-  allAddedUsers = [];
+  allAddedUsers = this.data.userIds;
   currentUserId: string;
   currentUserName: string;
 
@@ -27,13 +27,22 @@ export class DialogEditChannelComponent implements OnInit {
 
   ngOnInit(): void {
     this.getAllUsers();
-
+    this.deleteActivatedUser();
     this.usersService.currentUserProfile$.subscribe((userProfile) => {
       this.currentUserId = userProfile.uid;
     });
     setTimeout(() => {
       this.deleteCurrentUserFromList();
     }, 100);
+  }
+
+  deleteActivatedUser() {
+    for (let i = 0; i < this.allAddedUsers.length; i++) {
+      const element = this.allAddedUsers[i];
+      this.currentUserName =
+        this.allNonAddedUsers[this.findUserNumber(element)].displayName;
+      this.allNonAddedUsers.splice(this.findUserNumber(element), 1);
+    }
   }
 
   getAllUsers() {
