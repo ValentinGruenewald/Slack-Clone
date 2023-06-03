@@ -2,30 +2,23 @@
 <div mat-dialog-content>
   <div>
     <mat-form-field class="mr-16 mt-4" appearance="outline">
-      <mat-label>Chat name</mat-label>
-      <input [disabled]="" matInput [(ngModel)]="chat.chatName" />
+      <mat-label>Channnelname</mat-label>
+      <input [disabled]="" matInput [(ngModel)]="chat.chatName" required #chatNameInput="ngModel" />
+      <mat-error *ngIf="chatNameInput.invalid && chatNameInput.touched">Channelname is required</mat-error>
     </mat-form-field>
   </div>
-  <b class="color-black">Who should be in this chat?</b>
+  <b class="color-black">Who should be in this Channel?</b>
   <div class="select-users-container">
-    <button
-      mat-raised-button
-      color="primary"
-      *ngFor="let user of allAddedUsers; let i = index"
-      (click)="deleteUserFromChat(i)"
-    >
+    <button mat-raised-button color="primary" *ngFor="let user of allAddedUsers; let i = index"
+      (click)="deleteUserFromChat(i)">
       {{ user.displayName }}
     </button>
-    <button
-      mat-button
-      *ngFor="let user of allNonAddedUsers; let i = index"
-      (click)="addUserToChat(i)"
-    >
+    <button mat-button *ngFor="let user of allNonAddedUsers; let i = index" (click)="addUserToChat(i)">
       {{ user.displayName }}
     </button>
   </div>
 </div>
 <div mat-dialog-actions>
   <button mat-button (click)="this.dialogRef.close()">Cancel</button>
-  <button (click)="saveChat()" mat-button cdkFocusInitial>Save</button>
+  <button (click)="saveChat()" mat-button cdkFocusInitial [disabled]="chatNameInput.invalid">Save</button>
 </div>
