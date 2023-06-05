@@ -7,24 +7,24 @@
         [disabled]=""
         matInput
         [(ngModel)]="chat.chatName"
-        value="{{ chat.groupname}}"
+        value="{{ chat.groupname }}"
       />
     </mat-form-field>
   </div>
   <b class="color-black">Who should be in this chat?</b>
   <div class="select-users-container">
     <button
-      mat-button
-      *ngFor="let user of allNonAddedUsers; let i = index"
-      (click)="addUserToChat(i)"
-    >
-      {{ user.displayName }}
-    </button>
-    <button
       mat-raised-button
       color="primary"
       *ngFor="let user of allAddedUsers; let i = index"
       (click)="deleteUserFromChat(i)"
+    >
+      {{ user.displayName }}
+    </button>
+    <button
+      mat-button
+      *ngFor="let user of allNonAddedUsers; let i = index"
+      (click)="addUserToChat(i)"
     >
       {{ user.displayName }}
     </button>

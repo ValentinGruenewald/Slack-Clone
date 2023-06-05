@@ -2,9 +2,9 @@
 <div mat-dialog-content>
   <div>
     <mat-form-field class="mr-16 mt-4" appearance="outline">
-      <mat-label>Channnelname</mat-label>
+      <mat-label>Chat name</mat-label>
       <input [disabled]="" matInput [(ngModel)]="chat.chatName" required #chatNameInput="ngModel" />
-      <mat-error *ngIf="chatNameInput.invalid && chatNameInput.touched">Channelname is required</mat-error>
+      <mat-error *ngIf="chatNameInput.invalid && chatNameInput.touched">Chat name is required</mat-error>
     </mat-form-field>
   </div>
   <b class="color-black">Who should be in this Channel?</b>

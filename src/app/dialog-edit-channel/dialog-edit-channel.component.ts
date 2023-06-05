@@ -1,9 +1,6 @@
 import { Component, Inject, OnInit } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
-import { Chat } from 'src/models/chat.class';
-import { UsersService } from '../services/users.service';
-import { JsonMessage } from 'src/models/message.class';
 
 @Component({
   selector: 'app-dialog-edit-channel',
@@ -11,38 +8,28 @@ import { JsonMessage } from 'src/models/message.class';
   styleUrls: ['./dialog-edit-channel.component.scss'],
 })
 export class DialogEditChannelComponent implements OnInit {
-  chat = this.data;
+  chat = this.data.chat;
+  chatId: any = this.data.chatId;
   allNonAddedUsers = [];
-  allAddedUsers = this.data.userIds;
-  currentUserId: string;
+  allUsers = [];
+  allAddedUserIds = this.chat.userIds;
+  allAddedUsers = [];
   currentUserName: string;
 
   constructor(
     public dialogRef: MatDialogRef<DialogEditChannelComponent>,
     private firestore: AngularFirestore,
-    private usersService: UsersService,
     public dialog: MatDialogRef<DialogEditChannelComponent>,
     @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
-    this.deleteActivatedUser();
-    this.usersService.currentUserProfile$.subscribe((userProfile) => {
-      this.currentUserId = userProfile.uid;
-    });
-    setTimeout(() => {
-      this.deleteCurrentUserFromList();
-    }, 100);
-  }
 
-  deleteActivatedUser() {
-    for (let i = 0; i < this.allAddedUsers.length; i++) {
-      const element = this.allAddedUsers[i];
-      this.currentUserName =
-        this.allNonAddedUsers[this.findUserNumber(element)].displayName;
-      this.allNonAddedUsers.splice(this.findUserNumber(element), 1);
-    }
+    setTimeout(() => {
+      this.getAddedUsers();
+      this.getNonAddedUsers();
+    }, 100);
   }
 
   getAllUsers() {
@@ -50,16 +37,27 @@ export class DialogEditChannelComponent implements OnInit {
       .collection('users')
       .valueChanges({ idField: 'customIdName' })
       .subscribe((changes: any) => {
-        this.allNonAddedUsers = changes;
+        this.allUsers = changes;
       });
   }
 
-  deleteCurrentUserFromList() {
-    this.currentUserName =
-      this.allNonAddedUsers[
-        this.findUserNumber(this.currentUserId)
-      ].displayName;
-    this.allNonAddedUsers.splice(this.findUserNumber(this.currentUserId), 1);
+  getAddedUsers() {
+    this.allAddedUsers = this.allUsers.filter((user) =>
+      this.allAddedUserIds.includes(user.uid)
+    );
+  }
+
+  getNonAddedUsers<T>() {
+    const difference: T[] = [...this.allUsers];
+
+    for (const element of this.allAddedUsers) {
+      const index = difference.indexOf(element);
+      if (index !== -1) {
+        difference.splice(index, 1);
+      }
+    }
+
+    this.allNonAddedUsers = difference;
   }
 
   findUserNumber(currentId: string) {
@@ -67,40 +65,18 @@ export class DialogEditChannelComponent implements OnInit {
   }
 
   saveChat() {
-    if (this.chat.chatName == '') {
-    } else {
-      this.addChatConfigurations();
-      this.firestore
-        .collection('chats')
-        .add(this.chat.toJSON())
-        .then((result: any) => {
-          this.dialogRef.close();
-        });
-    }
-  }
-
-  addChatConfigurations() {
-    this.chat.groupchat = true;
-    let firstMessage: JsonMessage = {
-      createdAt: Intl.DateTimeFormat('de-DE', {
-        dateStyle: 'short',
-        timeStyle: 'short',
-      }).format(new Date()),
-      message:
-        this.currentUserName +
-        ' created the groupchat ' +
-        this.chat.chatName +
-        '.',
-      userId: 'vs2DTr1B3vqplKnTZx7O',
-    };
-    this.chat.messages = [firstMessage];
-    this.addMessageToInformWhoIsInChat();
     this.addUsersToChat();
+    this.firestore
+      .collection('chats')
+      .doc(this.chatId)
+      .update(this.chat)
+      .then((result: any) => {
+        this.dialogRef.close();
+      });
   }
 
   addUsersToChat() {
     this.chat.userIds = this.allAddedUsers.map((user) => user.uid);
-    this.chat.userIds.push(this.currentUserId);
   }
 
   addUserToChat(i) {
@@ -111,49 +87,5 @@ export class DialogEditChannelComponent implements OnInit {
   deleteUserFromChat(i) {
     this.allNonAddedUsers.push(this.allAddedUsers[i]);
     this.allAddedUsers.splice(i, 1);
-  }
-
-  addMessageToInformWhoIsInChat() {
-    let secondMessage: JsonMessage = {
-      createdAt: Intl.DateTimeFormat('de-DE', {
-        dateStyle: 'short',
-        timeStyle: 'short',
-      }).format(new Date()),
-      message: this.addedUserNamesAsMessage(),
-      userId: 'vs2DTr1B3vqplKnTZx7O',
-    };
-    this.chat.messages.push(secondMessage);
-  }
-
-  addedUserNamesAsMessage() {
-    if (this.allAddedUsers.length == 0) {
-      return this.currentUserName + ' created the chat.';
-    } else {
-      return (
-        this.currentUserName +
-        ' added ' +
-        this.checkIfOneOrMoreExtraAddedUsers() +
-        ' to the groupchat ' +
-        this.chat.chatName +
-        '.'
-      );
-    }
-  }
-
-  checkIfOneOrMoreExtraAddedUsers() {
-    if (this.allAddedUsers.length == 1) {
-      return this.allAddedUsers[0].displayName;
-    } else {
-      let message: string = this.allAddedUsers
-        .map((user) => user.displayName)
-        .toString()
-        .replace(/,/g, ', ');
-      const lastIndex = message.lastIndexOf(',');
-      message =
-        message.substring(0, lastIndex) +
-        ' and' +
-        message.substring(lastIndex + 1);
-      return message;
-    }
   }
 }

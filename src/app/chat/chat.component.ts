@@ -165,10 +165,12 @@ export class ChatComponent implements OnInit {
       : (this.isMenuOpen = false);
   }
 
-  openEditChannelDialog(chat:any) {
-    console.log(chat)
-    const dialog = this.dialog.open(DialogEditChannelComponent,{
-      data:chat,
+  openEditChannelDialog(chat: any) {
+    this.dialog.open(DialogEditChannelComponent, {
+      data: {
+        chat,
+        chatId: this.chatId,
+      },
     });
   }
 }
