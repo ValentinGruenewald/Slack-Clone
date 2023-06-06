@@ -156,7 +156,20 @@
   margin-left: 8px;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
+
+  .open-thread {
+    cursor: pointer;
+    margin: 0px;
+    margin-top: 4px;
+    padding-left: 12px;
+    color: #1f67ae;
+    font-weight: 700;
+
+    &:hover {
+      text-decoration: underline;
+    }
+  }
 }
 
 .message-header {

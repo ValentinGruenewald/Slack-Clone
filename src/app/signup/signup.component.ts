@@ -148,6 +148,7 @@ export class SignupComponent implements OnInit {
         this.findUser(otherUser.uid).displayName +
         '.',
       userId: 'vs2DTr1B3vqplKnTZx7O',
+      threadMessages: [],
     };
     chat.messages = [firstMessage];
     return chat.messages;

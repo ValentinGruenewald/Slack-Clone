@@ -1,0 +1,28 @@
+<div class="header">
+  <p><b>Thread messages</b></p>
+  <img (click)="closeDialog()" src="./assets/img/close.png" alt="" />
+</div>
+<div class="all-messages-container" #chat>
+  <div class="main-content" *ngFor="let message of messages">
+    <div class="chat-message">
+      <img
+        class="chat-message-img"
+        [src]="
+          findUser(message.userId)?.photoURL ??
+          './assets/img/image-placeholder.png'
+        "
+      />
+      <div class="chat-message-text">
+        <div class="message-header">
+          <p class="message-name">
+            <b (click)="openUserInfoDialog(findUser(message.userId))">{{
+              findUser(message.userId)?.displayName
+            }}</b>
+          </p>
+          <p class="message-time">{{ message.createdAt }} Uhr</p>
+        </div>
+        <p class="message-text">{{ message.message }}</p>
+      </div>
+    </div>
+  </div>
+</div>

@@ -3,7 +3,7 @@ import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chat } from 'src/models/chat.class';
 import { Observable, tap } from 'rxjs';
-import { JsonMessage, Message } from 'src/models/message.class';
+import { Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
@@ -11,6 +11,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.component';
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
+import { JsonThreadMessage } from 'src/models/thread-message.class';
+import { DialogThreadMessagesComponent } from '../dialog-thread-messages/dialog-thread-messages.component';
 
 @Component({
   selector: 'app-chat',
@@ -95,11 +97,24 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(message: string, chat: Chat) {
+    let threadMessages: JsonThreadMessage[] = [
+      {
+        createdAt: '16.05.23, 17:19',
+        message: 'thread message test',
+        userId: 'vs2DTr1B3vqplKnTZx7O',
+      },
+      {
+        createdAt: '16.05.23, 17:19',
+        message: 'thread message test',
+        userId: 'vs2DTr1B3vqplKnTZx7O',
+      },
+    ];
     if (message == '') {
     } else {
       let sentMessage = new Message({
         userId: this.currentUserId,
         message: message,
+        threadMessages: threadMessages,
       });
       chat.messages.push(sentMessage.toJSON());
       this.firestore.collection('chats').doc(this.chatId).update(chat);
@@ -171,6 +186,12 @@ export class ChatComponent implements OnInit {
         chat,
         chatId: this.chatId,
       },
+    });
+  }
+
+  openThreadDialog(threadMessages) {
+    this.dialog.open(DialogThreadMessagesComponent, {
+      data: threadMessages,
     });
   }
 }

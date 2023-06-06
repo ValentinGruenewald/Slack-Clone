@@ -1,16 +1,12 @@
-import { JsonThreadMessage } from './thread-message.class';
-
-export type JsonMessage = {
+export type JsonThreadMessage = {
   userId: string;
   message: string;
   createdAt: string;
-  threadMessages: JsonThreadMessage[];
 };
-export class Message {
+export class ThreadMessage {
   userId: string;
   message: string;
   createdAt: string;
-  threadMessages: JsonThreadMessage[];
 
   constructor(obj?: any) {
     this.userId = obj ? obj.userId : '';
@@ -19,15 +15,13 @@ export class Message {
       dateStyle: 'short',
       timeStyle: 'short',
     }).format(new Date());
-    this.threadMessages = obj ? obj.allThreadMessages : '';
   }
 
-  public toJSON(): JsonMessage {
+  public toJSON(): JsonThreadMessage {
     return {
       userId: this.userId,
       message: this.message,
       createdAt: this.createdAt,
-      threadMessages: this.threadMessages,
     };
   }
 }

@@ -76,6 +76,13 @@
                   <p class="message-time">{{ message.createdAt }} Uhr</p>
                 </div>
                 <p class="message-text">{{ message.message }}</p>
+                <p
+                  class="open-thread"
+                  *ngIf="message.threadMessages"
+                  (click)="openThreadDialog(message.threadMessages)"
+                >
+                  Show answers
+                </p>
               </div>
             </div>
           </div>

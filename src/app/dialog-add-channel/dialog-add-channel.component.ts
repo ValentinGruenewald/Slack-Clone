@@ -81,6 +81,7 @@ export class DialogAddChannelComponent implements OnInit {
         this.chat.chatName +
         '.',
       userId: 'vs2DTr1B3vqplKnTZx7O',
+      threadMessages: [],
     };
     this.chat.messages = [firstMessage];
     this.addMessageToInformWhoIsInChat();
@@ -110,6 +111,7 @@ export class DialogAddChannelComponent implements OnInit {
       }).format(new Date()),
       message: this.addedUserNamesAsMessage(),
       userId: 'vs2DTr1B3vqplKnTZx7O',
+      threadMessages: [],
     };
     this.chat.messages.push(secondMessage);
   }

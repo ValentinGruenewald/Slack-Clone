@@ -34,6 +34,7 @@ import { DialogUserInfoComponent } from './dialog-user-info/dialog-user-info.com
 import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 import { DialogEditChannelComponent } from './dialog-edit-channel/dialog-edit-channel.component';
+import { DialogThreadMessagesComponent } from './dialog-thread-messages/dialog-thread-messages.component';
 
 @NgModule({
   declarations: [
@@ -46,6 +47,7 @@ import { DialogEditChannelComponent } from './dialog-edit-channel/dialog-edit-ch
     DialogUserInfoComponent,
     DialogEditUserComponent,
     DialogEditChannelComponent,
+    DialogThreadMessagesComponent,
   ],
   imports: [
     BrowserModule,
