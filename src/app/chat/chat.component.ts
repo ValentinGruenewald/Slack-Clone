@@ -13,6 +13,9 @@ import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.co
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
 import { JsonThreadMessage } from 'src/models/thread-message.class';
 import { DialogThreadMessagesComponent } from '../dialog-thread-messages/dialog-thread-messages.component';
+import firebase from 'firebase/compat/app';
+import { first } from 'rxjs/operators';
+
 
 @Component({
   selector: 'app-chat',
@@ -108,7 +111,6 @@ export class ChatComponent implements OnInit {
       this.firestore.collection('chats').doc(this.chatId).update(chat);
       this.messageValue = '';
     }
-    console.log()
   }
 
   findUser(id: string) {
@@ -181,6 +183,24 @@ export class ChatComponent implements OnInit {
   openThreadDialog(threadMessages) {
     this.dialog.open(DialogThreadMessagesComponent, {
       data: threadMessages,
+    });
+  }
+
+  deleteMessage(index: number) {
+    const chatDocRef = this.firestore.collection('chats').doc(this.chatId);
+
+    chatDocRef.get().subscribe((doc) => {
+      const messages = doc.get('messages') as Array<any>;
+      messages.splice(index, 1);
+
+      chatDocRef
+        .update({ messages })
+        .then(() => {
+          console.log('Nachricht erfolgreich gelöscht');
+        })
+        .catch((error) => {
+          console.error('Fehler beim Löschen der Nachricht:', error);
+        });
     });
   }
 }
