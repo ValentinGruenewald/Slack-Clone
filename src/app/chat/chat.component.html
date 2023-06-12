@@ -78,7 +78,7 @@
                 <p class="message-text">{{ message.message }}</p>
                 <p
                   class="open-thread"
-                  *ngIf="message.threadMessages"
+                  *ngIf="message.threadMessages != ''"
                   (click)="openThreadDialog(message.threadMessages)"
                 >
                   Show answers
