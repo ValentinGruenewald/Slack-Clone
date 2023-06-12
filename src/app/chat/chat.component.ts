@@ -108,6 +108,7 @@ export class ChatComponent implements OnInit {
       this.firestore.collection('chats').doc(this.chatId).update(chat);
       this.messageValue = '';
     }
+    console.log(message, chat)
   }
 
   findUser(id: string) {
