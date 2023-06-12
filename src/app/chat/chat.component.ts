@@ -97,25 +97,13 @@ export class ChatComponent implements OnInit {
   }
 
   sendMessage(message: string, chat: Chat) {
-    let threadMessages: JsonThreadMessage[] = [
-      {
-        createdAt: '16.05.23, 17:19',
-        message: 'thread message test',
-        userId: 'vs2DTr1B3vqplKnTZx7O',
-      },
-      {
-        createdAt: '16.05.23, 17:19',
-        message: 'thread message test',
-        userId: 'vs2DTr1B3vqplKnTZx7O',
-      },
-    ];
     if (message == '') {
     } else {
       let sentMessage = new Message({
         userId: this.currentUserId,
         message: message,
-        threadMessages: threadMessages,
       });
+      sentMessage.threadMessages = [];
       chat.messages.push(sentMessage.toJSON());
       this.firestore.collection('chats').doc(this.chatId).update(chat);
       this.messageValue = '';
