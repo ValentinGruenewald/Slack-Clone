@@ -54,6 +54,11 @@ ul {
   display: none;
 }
 
+.center{
+  display: flex;
+  align-items: center;
+}
+
 .space{
   display: flex;
   justify-content: space-between;

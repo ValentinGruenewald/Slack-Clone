@@ -1,37 +1,32 @@
-import { Component, ElementRef, OnInit, ViewChild } from '@angular/core';
+import { Component, ElementRef, Input, OnInit, ViewChild } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Chat } from 'src/models/chat.class';
 import { Observable, tap } from 'rxjs';
-import { Message } from 'src/models/message.class';
 import { AuthService } from '../services/auth.service';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UsersService } from '../services/users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
-import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.component';
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
-import { DialogThreadMessagesComponent } from '../dialog-thread-messages/dialog-thread-messages.component';
-
 
 @Component({
-  selector: 'app-chat',
-  templateUrl: './chat.component.html',
-  styleUrls: ['./chat.component.scss'],
+  selector: 'app-header',
+  templateUrl: './header.component.html',
+  styleUrls: ['./header.component.scss'],
 })
-export class ChatComponent implements OnInit {
+export class HeaderComponent {
   chatId: any = '';
-  chat$: Observable<Chat>;
   allUsers;
   currentUserId: string;
-  messageValue: string = '';
   myForm: FormGroup;
   user$ = this.usersService.currentUserProfile$;
   isMenuOpen: boolean = false;
   generalChatId = '07ZN7o3Ene7HyL5fwkNp';
+  user:any;
 
   @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
-
+  @Input() chat$:Observable<Chat>;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -43,6 +38,9 @@ export class ChatComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
+          this.user$.subscribe((user) => {
+            this.user = user;
+          });
     this.myForm = this.formBuilder.group({
       myControl: ['', Validators.required],
     });
@@ -96,19 +94,7 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  sendMessage(message: string, chat: Chat) {
-    if (message == '') {
-    } else {
-      let sentMessage = new Message({
-        userId: this.currentUserId,
-        message: message,
-      });
-      sentMessage.threadMessages = [];
-      chat.messages.push(sentMessage.toJSON());
-      this.firestore.collection('chats').doc(this.chatId).update(chat);
-      this.messageValue = '';
-    }
-  }
+
 
   findUser(id: string) {
     return this.allUsers.filter((user) => user.customIdName === id)[0];
@@ -156,11 +142,6 @@ export class ChatComponent implements OnInit {
     this.dialog.open(DialogEditUserComponent);
   }
 
-  openUserInfoDialog(user: string): void {
-    const dialogRef = this.dialog.open(DialogUserInfoComponent, {
-      data: user,
-    });
-  }
 
   toggleMenu() {
     this.isMenuOpen == false
@@ -177,21 +158,5 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  openThreadDialog(threadMessages) {
-    this.dialog.open(DialogThreadMessagesComponent, {
-      data: threadMessages,
-    });
-  }
 
-  deleteMessage(index: number) {
-    const chatDocRef = this.firestore.collection('chats').doc(this.chatId);
-
-    chatDocRef.get().subscribe((doc) => {
-      const messages = doc.get('messages') as Array<any>;
-      messages.splice(index, 1);
-
-      chatDocRef
-        .update({ messages })
-    });
-  }
 }

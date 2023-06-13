@@ -28,10 +28,8 @@ export class DialogAddChatComponent {
 
     this.usersService.currentUserProfile$.subscribe((userProfile) => {
       this.currentUserId = userProfile.uid;
-    });
-    setTimeout(() => {
       this.deleteCurrentUserFromList();
-    }, 100);
+    });
   }
 
   getAllUsers() {
@@ -56,13 +54,13 @@ export class DialogAddChatComponent {
   }
 
   saveChat() {
-      this.addChatConfigurations();
-      this.firestore
-        .collection('chats')
-        .add(this.chat.toJSON())
-        .then((result: any) => {
-          this.dialogRef.close();
-        });
+    this.addChatConfigurations();
+    this.firestore
+      .collection('chats')
+      .add(this.chat.toJSON())
+      .then((result: any) => {
+        this.dialogRef.close();
+      });
   }
 
   addChatConfigurations() {

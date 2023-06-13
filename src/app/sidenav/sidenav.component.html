@@ -14,7 +14,7 @@
     <div *ngFor="let chat of allChats">
       <li *ngIf="!chat.groupchat && checkIfUserIsInChat(chat.userIds)" [routerLink]="['/client/' + chat.customIdName]">
         <div class="space">
-          <div>
+          <div class="center">
             <img [src]="
             showDirectChatUser(chat.userIds)?.photoURL ??
             './assets/img/image-placeholder.png'

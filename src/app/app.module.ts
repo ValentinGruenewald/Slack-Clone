@@ -37,6 +37,7 @@ import { DialogEditChannelComponent } from './dialog-edit-channel/dialog-edit-ch
 import { DialogThreadMessagesComponent } from './dialog-thread-messages/dialog-thread-messages.component';
 import { DialogConfirmDeleteChatComponent } from './dialog-confirm-delete-chat/dialog-confirm-delete-chat.component';
 import { DialogAddChatComponent } from './dialog-add-chat/dialog-add-chat.component';
+import { HeaderComponent } from './header/header.component';
 
 @NgModule({
   declarations: [
@@ -52,6 +53,7 @@ import { DialogAddChatComponent } from './dialog-add-chat/dialog-add-chat.compon
     DialogThreadMessagesComponent,
     DialogConfirmDeleteChatComponent,
     DialogAddChatComponent,
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
