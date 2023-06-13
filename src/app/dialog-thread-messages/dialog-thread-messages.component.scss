@@ -32,7 +32,8 @@
   max-height: 90vh;
   overflow: scroll;
   position: relative;
-  overflow: auto;
+  word-break: break-all;
+  overflow: hidden;
 }
 
 .chat-message {
@@ -147,5 +148,17 @@
         color: white;
       }
     }
+  }
+}
+
+@media (max-width: 650px) {
+  .all-messages-container {
+    width: 300px;
+  }
+}
+
+@media (max-width: 375px) {
+  .all-messages-container {
+    width: 250px;
   }
 }
