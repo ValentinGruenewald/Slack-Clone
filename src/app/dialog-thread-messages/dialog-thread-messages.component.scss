@@ -20,6 +20,12 @@
   }
 }
 
+.thread-chat {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .all-messages-container {
   width: 500px;
   min-height: 500px;
@@ -82,7 +88,6 @@
 .message-name {
   margin: 0px;
   margin-right: 8px;
-  cursor: pointer;
 
   &:hover {
     text-decoration: underline;
@@ -101,4 +106,46 @@
 
 .message-text {
   margin: 0px;
+}
+
+.text-input {
+  background-color: white;
+  width: 100%;
+
+  div {
+    margin: 16px;
+    border: 1px solid rgb(168, 168, 168);
+    border-radius: 8px;
+    padding: 16px;
+    background-color: white;
+    display: flex;
+
+    input {
+      border: none;
+      width: 100%;
+      font-size: 16px;
+
+      &:focus {
+        outline: none;
+      }
+    }
+
+    button {
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 1px;
+      border-radius: 4px;
+      cursor: pointer;
+
+      background-color: white;
+      color: lightgray;
+
+      &:hover {
+        background-color: #3f0f40;
+        color: white;
+      }
+    }
+  }
 }

@@ -24,11 +24,11 @@
                 </div>
                 <p class="message-text">{{ message.message }}</p>
                 <p class="open-thread" *ngIf="message.threadMessages != ''"
-                  (click)="openThreadDialog(message.threadMessages)">
+                  (click)="openThreadDialog(message.threadMessages, chat, i)">
                   Show answers
                 </p>
                 <div class="hover-box">
-                  <svg (click)="openThreadDialog(message.threadMessages)" xmlns="http://www.w3.org/2000/svg"
+                  <svg (click)="openThreadDialog(message.threadMessages, chat, i)" xmlns="http://www.w3.org/2000/svg"
                     height="1em"
                     viewBox="0 0 512 512"><!--! Font Awesome Free 6.4.0 by @fontawesome - https://fontawesome.com License - https://fontawesome.com/license (Commercial License) Copyright 2023 Fonticons, Inc. -->
                     <style>
@@ -58,7 +58,7 @@
 
         <div class="text-input">
           <div>
-            <input (keydown.enter)="sendMessage(message.value, chat)" type="text" #message placeholder="Message"
+            <input (keydown.enter)="sendMessage(message.value, chat, chatId)" type="text" #message placeholder="Message"
               [(ngModel)]="messageValue" />
             <button (click)="sendMessage(message.value, chat)">
               <mat-icon>chevron_right</mat-icon>

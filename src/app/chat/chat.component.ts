@@ -13,7 +13,6 @@ import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.co
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
 import { DialogThreadMessagesComponent } from '../dialog-thread-messages/dialog-thread-messages.component';
 
-
 @Component({
   selector: 'app-chat',
   templateUrl: './chat.component.html',
@@ -177,9 +176,9 @@ export class ChatComponent implements OnInit {
     });
   }
 
-  openThreadDialog(threadMessages) {
+  openThreadDialog(threadMessages, chat, i) {
     this.dialog.open(DialogThreadMessagesComponent, {
-      data: threadMessages,
+      data: { threadMessages: threadMessages, chat: chat, chatId: this.chatId , messageNr : i},
     });
   }
 
@@ -190,8 +189,7 @@ export class ChatComponent implements OnInit {
       const messages = doc.get('messages') as Array<any>;
       messages.splice(index, 1);
 
-      chatDocRef
-        .update({ messages })
+      chatDocRef.update({ messages });
     });
   }
 }
