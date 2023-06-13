@@ -5,6 +5,8 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogAddChannelComponent } from '../dialog-add-channel/dialog-add-channel.component';
 import { UsersService } from '../services/users.service';
 import { AuthService } from '../services/auth.service';
+import { DialogConfirmDeleteChatComponent } from '../dialog-confirm-delete-chat/dialog-confirm-delete-chat.component';
+import { DialogAddChatComponent } from '../dialog-add-chat/dialog-add-chat.component';
 
 @Component({
   selector: 'app-sidenav',
@@ -63,9 +65,21 @@ export class SidenavComponent implements OnInit {
     return userIds?.some((id) => id === this.currentUserId);
   }
 
-  openDialog() {
+  openAddChannelDialog() {
     setTimeout(() => {
       this.dialog.open(DialogAddChannelComponent);
     }, 100);
+  }
+
+  openAddChatDialog() {
+    setTimeout(() => {
+      this.dialog.open(DialogAddChatComponent);
+    }, 100);
+  }
+
+  openConformationDialog(chat) {
+    this.dialog.open(DialogConfirmDeleteChatComponent, {
+      data: chat,
+    });
   }
 }

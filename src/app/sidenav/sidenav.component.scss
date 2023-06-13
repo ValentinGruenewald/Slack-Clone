@@ -41,8 +41,24 @@ ul {
 
     &:hover {
       background-color: rgba($color: white, $alpha: 0.1);
+
+      .d-none{
+        display: flex;
+        fill: white;
+      }
     }
   }
+}
+
+.d-none{
+  display: none;
+}
+
+.space{
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  width: 100%;
 }
 
 .add-channel {

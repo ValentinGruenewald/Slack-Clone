@@ -1,0 +1,17 @@
+<h1 mat-dialog-title>Add Chat</h1>
+<div mat-dialog-content>
+  <b class="color-black">Who should be in this Chat?</b>
+  <div class="select-users-container">
+    <button mat-raised-button color="primary" *ngFor="let user of allAddedUsers; let i = index"
+      (click)="deleteUserFromChat(i)">
+      {{ user.displayName }}
+    </button>
+    <button mat-button *ngFor="let user of allNonAddedUsers; let i = index" (click)="addUserToChat(i)">
+      {{ user.displayName }}
+    </button>
+  </div>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="this.dialogRef.close()">Cancel</button>
+  <button (click)="saveChat()" mat-button cdkFocusInitial>Save</button>
+</div>

@@ -16,7 +16,7 @@
               " />
 
             {{ showChatName(chat.chatName, chat.groupchat, chat.userIds) }}
-            <img class="edit" src="./assets/img/edit.png" />
+            <img *ngIf="chat.groupchat" class="edit" src="./assets/img/edit.png" />
           </div>
 
           <button *ngIf="user$ | async as user" mat-button [matMenuTriggerFor]="userMenu" class="current-user">

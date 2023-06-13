@@ -35,6 +35,8 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { DialogEditUserComponent } from './dialog-edit-user/dialog-edit-user.component';
 import { DialogEditChannelComponent } from './dialog-edit-channel/dialog-edit-channel.component';
 import { DialogThreadMessagesComponent } from './dialog-thread-messages/dialog-thread-messages.component';
+import { DialogConfirmDeleteChatComponent } from './dialog-confirm-delete-chat/dialog-confirm-delete-chat.component';
+import { DialogAddChatComponent } from './dialog-add-chat/dialog-add-chat.component';
 
 @NgModule({
   declarations: [
@@ -48,6 +50,8 @@ import { DialogThreadMessagesComponent } from './dialog-thread-messages/dialog-t
     DialogEditUserComponent,
     DialogEditChannelComponent,
     DialogThreadMessagesComponent,
+    DialogConfirmDeleteChatComponent,
+    DialogAddChatComponent,
   ],
   imports: [
     BrowserModule,

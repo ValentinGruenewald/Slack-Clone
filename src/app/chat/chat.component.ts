@@ -11,10 +11,9 @@ import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.component';
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
-import { JsonThreadMessage } from 'src/models/thread-message.class';
 import { DialogThreadMessagesComponent } from '../dialog-thread-messages/dialog-thread-messages.component';
-import firebase from 'firebase/compat/app';
-import { first } from 'rxjs/operators';
+
+
 
 
 @Component({
@@ -195,12 +194,6 @@ export class ChatComponent implements OnInit {
 
       chatDocRef
         .update({ messages })
-        .then(() => {
-          console.log('Nachricht erfolgreich gelöscht');
-        })
-        .catch((error) => {
-          console.error('Fehler beim Löschen der Nachricht:', error);
-        });
     });
   }
 }
