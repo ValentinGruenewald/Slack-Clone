@@ -1,0 +1,23 @@
+.option{
+  display: flex;
+  justify-content: space-between;
+  width: 180px;
+
+  img{
+    object-fit: cover;
+    height: 24px;
+    width: 24px;
+    border-radius: 6px;
+  }
+}
+
+.end{
+  display: flex;
+  justify-content: flex-end;
+  padding-right: 24px;
+
+  :last-child{
+    color: white;
+    background-color:#3f0f40 ;
+  }
+}

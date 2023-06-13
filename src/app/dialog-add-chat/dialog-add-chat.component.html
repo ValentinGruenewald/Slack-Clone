@@ -1,17 +1,17 @@
-<h1 mat-dialog-title>Add Chat</h1>
 <div mat-dialog-content>
   <b class="color-black">Who should be in this Chat?</b>
   <div class="select-users-container">
-    <button mat-raised-button color="primary" *ngFor="let user of allAddedUsers; let i = index"
-      (click)="deleteUserFromChat(i)">
-      {{ user.displayName }}
-    </button>
-    <button mat-button *ngFor="let user of allNonAddedUsers; let i = index" (click)="addUserToChat(i)">
-      {{ user.displayName }}
-    </button>
+    <mat-form-field>
+      <mat-label>Add Users</mat-label>
+      <mat-select [(ngModel)]="selectedUser" name="selectedUser">
+        <mat-option *ngFor="let user of allNonAddedUsers; let i=index" [value]="user">
+      <div class="option">{{ user.displayName }} <img src="{{user.photoURL}}" alt=""></div>
+        </mat-option>
+      </mat-select>
+    </mat-form-field>
   </div>
 </div>
-<div mat-dialog-actions>
+<div class="end" mat-dialog-actions>
   <button mat-button (click)="this.dialogRef.close()">Cancel</button>
-  <button (click)="saveChat()" mat-button cdkFocusInitial>Save</button>
+  <button (click)="saveChatAndAddUser()" mat-button cdkFocusInitial>Save</button>
 </div>

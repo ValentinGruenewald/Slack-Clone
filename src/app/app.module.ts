@@ -4,7 +4,7 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { environment } from '../environments/environment';
-import { provideAuth, getAuth, Auth } from '@angular/fire/auth';
+import { provideAuth, getAuth } from '@angular/fire/auth';
 import { provideDatabase, getDatabase } from '@angular/fire/database';
 import {
   provideFirestore,
@@ -38,6 +38,10 @@ import { DialogThreadMessagesComponent } from './dialog-thread-messages/dialog-t
 import { DialogConfirmDeleteChatComponent } from './dialog-confirm-delete-chat/dialog-confirm-delete-chat.component';
 import { DialogAddChatComponent } from './dialog-add-chat/dialog-add-chat.component';
 import { HeaderComponent } from './header/header.component';
+import { MatOptionModule } from '@angular/material/core';
+import { MatSelectModule } from '@angular/material/select';
+
+
 
 @NgModule({
   declarations: [
@@ -77,6 +81,8 @@ import { HeaderComponent } from './header/header.component';
     FormsModule,
     MatDialogModule,
     MatCheckboxModule,
+    MatOptionModule,
+    MatSelectModule,
   ],
   providers: [AuthService],
   bootstrap: [AppComponent],

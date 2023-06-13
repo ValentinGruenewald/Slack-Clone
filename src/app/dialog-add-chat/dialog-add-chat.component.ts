@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Chat } from 'src/models/chat.class';
@@ -16,6 +16,7 @@ export class DialogAddChatComponent {
   allAddedUsers = [];
   currentUserId: string;
   currentUserName: string;
+  selectedUser: any;
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddChatComponent>,
@@ -61,6 +62,7 @@ export class DialogAddChatComponent {
       .then((result: any) => {
         this.dialogRef.close();
       });
+    console.log(this.allAddedUsers);
   }
 
   addChatConfigurations() {
@@ -71,16 +73,18 @@ export class DialogAddChatComponent {
         timeStyle: 'short',
       }).format(new Date()),
       message:
-        this.currentUserName +
-        ' created the groupchat ' +
-        this.chat.chatName +
-        '.',
+        this.currentUserName + ' opened the Chat ' + this.chat.chatName + '.',
       userId: 'vs2DTr1B3vqplKnTZx7O',
       threadMessages: [],
     };
     this.chat.messages = [firstMessage];
-    this.addMessageToInformWhoIsInChat();
     this.addUsersToChat();
+  }
+
+  saveChatAndAddUser() {
+    const selectedIndex = this.allNonAddedUsers.indexOf(this.selectedUser);
+    this.addUserToChat(selectedIndex);
+    this.saveChat();
   }
 
   addUsersToChat() {
@@ -91,39 +95,6 @@ export class DialogAddChatComponent {
   addUserToChat(i) {
     this.allAddedUsers.push(this.allNonAddedUsers[i]);
     this.allNonAddedUsers.splice(i, 1);
-  }
-
-  deleteUserFromChat(i) {
-    this.allNonAddedUsers.push(this.allAddedUsers[i]);
-    this.allAddedUsers.splice(i, 1);
-  }
-
-  addMessageToInformWhoIsInChat() {
-    let secondMessage: JsonMessage = {
-      createdAt: Intl.DateTimeFormat('de-DE', {
-        dateStyle: 'short',
-        timeStyle: 'short',
-      }).format(new Date()),
-      message: this.addedUserNamesAsMessage(),
-      userId: 'vs2DTr1B3vqplKnTZx7O',
-      threadMessages: [],
-    };
-    this.chat.messages.push(secondMessage);
-  }
-
-  addedUserNamesAsMessage() {
-    if (this.allAddedUsers.length == 0) {
-      return this.currentUserName + ' created the chat.';
-    } else {
-      return (
-        this.currentUserName +
-        ' added ' +
-        this.checkIfOneOrMoreExtraAddedUsers() +
-        ' to the groupchat ' +
-        this.chat.chatName +
-        '.'
-      );
-    }
   }
 
   checkIfOneOrMoreExtraAddedUsers() {
