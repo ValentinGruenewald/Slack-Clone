@@ -12,6 +12,7 @@ import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.co
 import { DialogUserInfoComponent } from '../dialog-user-info/dialog-user-info.component';
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
 import { DialogThreadMessagesComponent } from '../dialog-thread-messages/dialog-thread-messages.component';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-chat',
@@ -26,8 +27,8 @@ export class ChatComponent implements OnInit {
   messageValue: string = '';
   myForm: FormGroup;
   user$ = this.usersService.currentUserProfile$;
-  isMenuOpen: boolean = false;
   generalChatId = 'JQnRfxS0R5DSVhtVq0rc';
+  isMenuOpen: boolean = false;
 
   @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
 
@@ -38,7 +39,8 @@ export class ChatComponent implements OnInit {
     public authService: AuthService,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    public menuService: MenuService
   ) {}
 
   ngOnInit(): void {
@@ -58,6 +60,10 @@ export class ChatComponent implements OnInit {
     setTimeout(() => {
       this.getCurrentUser();
     }, 1000);
+
+    this.menuService.isMenuOpen$.subscribe((status) => {
+      this.isMenuOpen = status;
+    });
   }
 
   getChat() {
@@ -162,9 +168,8 @@ export class ChatComponent implements OnInit {
   }
 
   toggleMenu() {
-    this.isMenuOpen == false
-      ? (this.isMenuOpen = true)
-      : (this.isMenuOpen = false);
+    this.isMenuOpen = !this.isMenuOpen;
+    this.menuService.toggleMenu(this.isMenuOpen);
   }
 
   openEditChannelDialog(chat: any) {
@@ -178,7 +183,12 @@ export class ChatComponent implements OnInit {
 
   openThreadDialog(threadMessages, chat, i) {
     this.dialog.open(DialogThreadMessagesComponent, {
-      data: { threadMessages: threadMessages, chat: chat, chatId: this.chatId , messageNr : i},
+      data: {
+        threadMessages: threadMessages,
+        chat: chat,
+        chatId: this.chatId,
+        messageNr: i,
+      },
     });
   }
 

@@ -9,6 +9,7 @@ import { UsersService } from '../services/users.service';
 import { MatDialog } from '@angular/material/dialog';
 import { DialogEditUserComponent } from '../dialog-edit-user/dialog-edit-user.component';
 import { DialogEditChannelComponent } from '../dialog-edit-channel/dialog-edit-channel.component';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-header',
@@ -23,10 +24,10 @@ export class HeaderComponent {
   user$ = this.usersService.currentUserProfile$;
   isMenuOpen: boolean = false;
   generalChatId = 'JQnRfxS0R5DSVhtVq0rc';
-  user:any;
+  user: any;
 
   @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
-  @Input() chat$:Observable<Chat>;
+  @Input() chat$: Observable<Chat>;
   constructor(
     private route: ActivatedRoute,
     private router: Router,
@@ -34,13 +35,14 @@ export class HeaderComponent {
     public authService: AuthService,
     private formBuilder: FormBuilder,
     private usersService: UsersService,
-    public dialog: MatDialog
+    public dialog: MatDialog,
+    private menuService: MenuService
   ) {}
 
   ngOnInit(): void {
-          this.user$.subscribe((user) => {
-            this.user = user;
-          });
+    this.user$.subscribe((user) => {
+      this.user = user;
+    });
     this.myForm = this.formBuilder.group({
       myControl: ['', Validators.required],
     });
@@ -94,8 +96,6 @@ export class HeaderComponent {
     });
   }
 
-
-
   findUser(id: string) {
     return this.allUsers.filter((user) => user.customIdName === id)[0];
   }
@@ -142,11 +142,9 @@ export class HeaderComponent {
     this.dialog.open(DialogEditUserComponent);
   }
 
-
   toggleMenu() {
-    this.isMenuOpen == false
-      ? (this.isMenuOpen = true)
-      : (this.isMenuOpen = false);
+    this.isMenuOpen = !this.isMenuOpen;
+    this.menuService.toggleMenu(this.isMenuOpen);
   }
 
   openEditChannelDialog(chat: any) {
@@ -157,6 +155,4 @@ export class HeaderComponent {
       },
     });
   }
-
-
 }

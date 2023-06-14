@@ -8,6 +8,7 @@ import { AuthService } from '../services/auth.service';
 import { DialogConfirmDeleteChatComponent } from '../dialog-confirm-delete-chat/dialog-confirm-delete-chat.component';
 import { DialogAddChatComponent } from '../dialog-add-chat/dialog-add-chat.component';
 import { map } from 'rxjs';
+import { MenuService } from '../services/menu.service';
 
 @Component({
   selector: 'app-sidenav',
@@ -19,7 +20,7 @@ export class SidenavComponent implements OnInit {
     private firestore: AngularFirestore,
     public dialog: MatDialog,
     private usersService: UsersService,
-    public authService: AuthService
+    public authService: AuthService,
   ) {}
 
   chat = new Chat();

@@ -153,6 +153,10 @@
   display: none;
 }
 
+  .opened-sidenav {
+    width: 0%;
+  }
+
 @media (hover: none) {
  .hover-box{
   display: flex;
