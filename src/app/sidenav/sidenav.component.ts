@@ -7,6 +7,7 @@ import { UsersService } from '../services/users.service';
 import { AuthService } from '../services/auth.service';
 import { DialogConfirmDeleteChatComponent } from '../dialog-confirm-delete-chat/dialog-confirm-delete-chat.component';
 import { DialogAddChatComponent } from '../dialog-add-chat/dialog-add-chat.component';
+import { map } from 'rxjs';
 
 @Component({
   selector: 'app-sidenav',
@@ -26,7 +27,7 @@ export class SidenavComponent implements OnInit {
   allUsers: any;
   currentUserId: string;
   openChat: any;
-  alles: any[] = [];
+  docs: any[] = [];
   openChats: any[] = [];
 
   ngOnInit(): void {
@@ -77,11 +78,9 @@ export class SidenavComponent implements OnInit {
   }
 
   openAddChatDialog() {
-    setTimeout(() => {
-      this.dialog.open(DialogAddChatComponent, {
+    this.dialog.open(DialogAddChatComponent, {
       data: this.openChats,
     });
-    }, 100);
   }
 
   openConformationDialog(chat) {
@@ -93,19 +92,20 @@ export class SidenavComponent implements OnInit {
   checkChatsForCurrentUser() {
     this.firestore
       .collection('chats')
-      .get()
-      .subscribe((querySnapshot) => {
-        querySnapshot.forEach((document) => {
-          // Zugriff auf die Daten jedes Dokuments
-          const data = document.data();
-          this.alles.push(data);
-        });
+      .snapshotChanges()
+      .pipe(
+        map((snapshot) =>
+          snapshot.map((document) => document.payload.doc.data())
+        )
+      )
+      .subscribe((docs) => {
+        this.docs = docs;
       });
   }
 
   isChatUser() {
-    for (let i = 0; i < this.alles.length; i++) {
-      const element = this.alles[i];
+    for (let i = 0; i < this.docs.length; i++) {
+      const element = this.docs[i];
       if (
         element['userIds'].includes(this.currentUserId) &&
         element['groupchat'] === false

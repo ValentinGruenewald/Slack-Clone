@@ -1,4 +1,4 @@
-import { Component, Inject, Input } from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
 import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Chat } from 'src/models/chat.class';
@@ -32,8 +32,6 @@ export class DialogAddChatComponent {
       this.currentUserId = userProfile.uid;
       this.deleteCurrentUserFromList();
     });
-    this.filterUsers();
-    console.log(this.showUsers)
   }
 
   getAllUsers() {
@@ -114,10 +112,6 @@ export class DialogAddChatComponent {
         message.substring(lastIndex + 1);
       return message;
     }
-  }
-
-  log() {
-    console.log( this.showUsers);
   }
 
   filterUsers() {
