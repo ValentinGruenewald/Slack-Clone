@@ -2,11 +2,16 @@
   <b class="color-black">Who should be in this Chat?</b>
   <div class="select-users-container">
     <mat-form-field>
-      <mat-label>Add Users</mat-label>
+      <mat-label>Add User</mat-label>
       <mat-select (click)="filterUsers()" [(ngModel)]="selectedUser" name="selectedUser">
-        <mat-option *ngFor="let user of showUsers; let i=index" [value]="user">
-      <div class="option">{{ user.displayName }} <img src="{{user.photoURL}}" alt=""></div>
-        </mat-option>
+        <ng-container *ngIf="showUsers.length > 0; else noUsersAvailable">
+          <mat-option *ngFor="let user of showUsers; let i=index" [value]="user">
+            <div class="option">{{ user.displayName }} <img src="{{user.photoURL}}" alt=""></div>
+          </mat-option>
+        </ng-container>
+        <ng-template #noUsersAvailable>
+          <mat-option disabled>No user available</mat-option>
+        </ng-template>
       </mat-select>
     </mat-form-field>
   </div>
