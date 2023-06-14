@@ -39,7 +39,7 @@ export class SignupComponent implements OnInit {
   allChats: Chat[] = [];
   generalChat: Chat;
   currentUserId: string;
-  generalChatId = '07ZN7o3Ene7HyL5fwkNp';
+  generalChatId = 'JQnRfxS0R5DSVhtVq0rc';
 
   signUpForm = new FormGroup(
     {

@@ -22,7 +22,7 @@ export class HeaderComponent {
   myForm: FormGroup;
   user$ = this.usersService.currentUserProfile$;
   isMenuOpen: boolean = false;
-  generalChatId = '07ZN7o3Ene7HyL5fwkNp';
+  generalChatId = 'JQnRfxS0R5DSVhtVq0rc';
   user:any;
 
   @ViewChild('chat') chatRef: ElementRef<HTMLDivElement>;
