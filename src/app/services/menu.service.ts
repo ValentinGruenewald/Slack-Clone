@@ -10,6 +10,5 @@ export class MenuService {
 
   toggleMenu(status: boolean) {
     this.isMenuOpenSubject.next(status);
-    console.log(status)
   }
 }
