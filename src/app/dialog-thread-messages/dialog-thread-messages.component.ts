@@ -19,6 +19,7 @@ export class DialogThreadMessagesComponent implements OnInit {
   allUsers: any = [{}, {}];
   currentUserId: string;
   messageValue: string = '';
+  currentMessage: Message[] = [this.chat.messages[this.messageNr]];
 
   constructor(
     public dialogRef: MatDialogRef<DialogThreadMessagesComponent>,
@@ -31,6 +32,7 @@ export class DialogThreadMessagesComponent implements OnInit {
   ngOnInit(): void {
     this.getUsers();
     this.getCurrentUser();
+    console.log(this.currentMessage);
   }
 
   getUsers() {

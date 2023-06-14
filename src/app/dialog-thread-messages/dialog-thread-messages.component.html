@@ -4,6 +4,26 @@
 </div>
 <div class="thread-chat">
   <div class="all-messages-container" #chat>
+    <div *ngFor="let message of currentMessage">
+      <div class="chat-message">
+        <img
+          class="chat-message-img"
+          [src]="
+            findUser(message.userId)?.photoURL ??
+            './assets/img/image-placeholder.png'
+          "
+        />
+        <div class="chat-message-text">
+          <div class="message-header">
+            <p class="message-name">
+              <b>{{ findUser(message.userId)?.displayName }}</b>
+            </p>
+            <p class="message-time">{{ message.createdAt }} Uhr</p>
+          </div>
+          <p class="message-text">{{ message.message }}</p>
+        </div>
+      </div>
+    </div>
     <div class="main-content" *ngFor="let message of messages">
       <div class="chat-message">
         <img
