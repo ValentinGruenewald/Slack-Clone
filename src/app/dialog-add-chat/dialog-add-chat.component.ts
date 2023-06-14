@@ -1,6 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, Inject, Input } from '@angular/core';
 import { AngularFirestore } from '@angular/fire/compat/firestore';
-import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA, MatDialogRef } from '@angular/material/dialog';
 import { Chat } from 'src/models/chat.class';
 import { UsersService } from '../services/users.service';
 import { JsonMessage } from 'src/models/message.class';
@@ -17,20 +17,23 @@ export class DialogAddChatComponent {
   currentUserId: string;
   currentUserName: string;
   selectedUser: any;
+  showUsers:any = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddChatComponent>,
     private firestore: AngularFirestore,
-    private usersService: UsersService
+    private usersService: UsersService,
+    @Inject(MAT_DIALOG_DATA) public data: any
   ) {}
 
   ngOnInit(): void {
     this.getAllUsers();
-
     this.usersService.currentUserProfile$.subscribe((userProfile) => {
       this.currentUserId = userProfile.uid;
       this.deleteCurrentUserFromList();
     });
+    this.filterUsers();
+    console.log(this.showUsers)
   }
 
   getAllUsers() {
@@ -62,7 +65,6 @@ export class DialogAddChatComponent {
       .then((result: any) => {
         this.dialogRef.close();
       });
-    console.log(this.allAddedUsers);
   }
 
   addChatConfigurations() {
@@ -112,5 +114,16 @@ export class DialogAddChatComponent {
         message.substring(lastIndex + 1);
       return message;
     }
+  }
+
+  log() {
+    console.log( this.showUsers);
+  }
+
+  filterUsers() {
+    const filteredUsers = this.allNonAddedUsers.filter(
+      (user) => !this.data.includes(user.uid)
+    );
+    this.showUsers = filteredUsers
   }
 }

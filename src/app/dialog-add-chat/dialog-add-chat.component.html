@@ -3,8 +3,8 @@
   <div class="select-users-container">
     <mat-form-field>
       <mat-label>Add Users</mat-label>
-      <mat-select [(ngModel)]="selectedUser" name="selectedUser">
-        <mat-option *ngFor="let user of allNonAddedUsers; let i=index" [value]="user">
+      <mat-select (click)="filterUsers()" [(ngModel)]="selectedUser" name="selectedUser">
+        <mat-option *ngFor="let user of showUsers; let i=index" [value]="user">
       <div class="option">{{ user.displayName }} <img src="{{user.photoURL}}" alt=""></div>
         </mat-option>
       </mat-select>

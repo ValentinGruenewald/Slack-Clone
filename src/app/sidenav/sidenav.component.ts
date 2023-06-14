@@ -23,8 +23,11 @@ export class SidenavComponent implements OnInit {
 
   chat = new Chat();
   allChats: Chat[] = [];
-  allUsers;
+  allUsers: any;
   currentUserId: string;
+  openChat: any;
+  alles: any[] = [];
+  openChats: any[] = [];
 
   ngOnInit(): void {
     this.firestore
@@ -43,6 +46,8 @@ export class SidenavComponent implements OnInit {
     setTimeout(() => {
       this.getCurrentUser();
     }, 1000);
+
+    this.checkChatsForCurrentUser();
   }
 
   getCurrentUser() {
@@ -73,7 +78,9 @@ export class SidenavComponent implements OnInit {
 
   openAddChatDialog() {
     setTimeout(() => {
-      this.dialog.open(DialogAddChatComponent);
+      this.dialog.open(DialogAddChatComponent, {
+      data: this.openChats,
+    });
     }, 100);
   }
 
@@ -81,5 +88,35 @@ export class SidenavComponent implements OnInit {
     this.dialog.open(DialogConfirmDeleteChatComponent, {
       data: chat,
     });
+  }
+
+  checkChatsForCurrentUser() {
+    this.firestore
+      .collection('chats')
+      .get()
+      .subscribe((querySnapshot) => {
+        querySnapshot.forEach((document) => {
+          // Zugriff auf die Daten jedes Dokuments
+          const data = document.data();
+          this.alles.push(data);
+        });
+      });
+  }
+
+  isChatUser() {
+    for (let i = 0; i < this.alles.length; i++) {
+      const element = this.alles[i];
+      if (
+        element['userIds'].includes(this.currentUserId) &&
+        element['groupchat'] === false
+      ) {
+        const otherUserId = element['userIds'].find(
+          (id) => id !== this.currentUserId
+        );
+        if (otherUserId && !this.openChats.includes(otherUserId)) {
+          this.openChats.push(otherUserId);
+        }
+      }
+    }
   }
 }
