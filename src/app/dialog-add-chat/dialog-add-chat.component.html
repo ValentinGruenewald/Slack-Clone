@@ -6,8 +6,8 @@
       <mat-select (click)="filterUsers()" [(ngModel)]="selectedUser" name="selectedUser">
         <ng-container *ngIf="showUsers.length > 0; else noUsersAvailable">
           <mat-option *ngFor="let user of showUsers; let i=index" [value]="user">
-            <div class="option">{{ user.displayName }} <img src="{{user.photoURL}} ??
-            './assets/img/image-placeholder.png'" alt=""></div>
+            <div class="option">{{ user.displayName }} <img
+                [src]="user.photoURL || './assets/img/image-placeholder.png'" alt=""></div>
           </mat-option>
         </ng-container>
         <ng-template #noUsersAvailable>
@@ -18,6 +18,6 @@
   </div>
 </div>
 <div class="end" mat-dialog-actions>
-  <button mat-button (click)="this.dialogRef.close()">Cancel</button>
+  <button mat-button (click)="dialogRef.close()">Cancel</button>
   <button (click)="saveChatAndAddUser()" mat-button cdkFocusInitial>Save</button>
 </div>
