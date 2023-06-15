@@ -14,6 +14,17 @@ mat-form-field {
   color: black;
 }
 
+.start {
+  display: flex;
+  justify-content: flex-start;
+  padding-left: 24px;
+
+  :last-child {
+    color: white;
+    background-color: #3f0f40;
+  }
+}
+
 @media (max-width: 750px) {
   .select-users-container {
     width: 250px;
