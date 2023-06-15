@@ -2,10 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 500px;
-
-  button {
-    margin-right: 6px;
-  }
+  gap: 8px;
 }
 
 mat-form-field {

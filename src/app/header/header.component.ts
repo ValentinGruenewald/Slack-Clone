@@ -143,7 +143,9 @@ export class HeaderComponent {
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen == false
+      ? (this.isMenuOpen = true)
+      : (this.isMenuOpen = false);
     this.menuService.toggleMenu(this.isMenuOpen);
   }
 

@@ -168,8 +168,10 @@ export class ChatComponent implements OnInit {
   }
 
   toggleMenu() {
-    this.isMenuOpen = !this.isMenuOpen;
-    this.menuService.toggleMenu(this.isMenuOpen);
+    if (this.isMenuOpen) {
+      this.isMenuOpen = !this.isMenuOpen;
+      this.menuService.toggleMenu(this.isMenuOpen);
+    }
   }
 
   openEditChannelDialog(chat: any) {

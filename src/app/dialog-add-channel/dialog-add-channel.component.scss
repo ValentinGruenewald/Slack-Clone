@@ -2,10 +2,7 @@
   display: flex;
   flex-wrap: wrap;
   width: 500px;
-
-  button {
-    margin-right: 6px;
-  }
+  gap: 8px;
 }
 
 mat-form-field {
@@ -17,14 +14,14 @@ mat-form-field {
   color: black;
 }
 
-.start{
+.start {
   display: flex;
   justify-content: flex-start;
   padding-left: 24px;
 
-  :last-child{
+  :last-child {
     color: white;
-    background-color:#3f0f40 ;
+    background-color: #3f0f40;
   }
 }
 
