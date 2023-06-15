@@ -17,7 +17,7 @@ export class DialogAddChatComponent {
   currentUserId: string;
   currentUserName: string;
   selectedUser: any;
-  showUsers:any = [];
+  showUsers: any = [];
 
   constructor(
     public dialogRef: MatDialogRef<DialogAddChatComponent>,
@@ -29,8 +29,10 @@ export class DialogAddChatComponent {
   ngOnInit(): void {
     this.getAllUsers();
     this.usersService.currentUserProfile$.subscribe((userProfile) => {
-      this.currentUserId = userProfile.uid;
-      this.deleteCurrentUserFromList();
+      if (userProfile && userProfile.uid) {
+        this.currentUserId = userProfile.uid;
+        this.deleteCurrentUserFromList();
+      }
     });
   }
 
@@ -118,6 +120,6 @@ export class DialogAddChatComponent {
     const filteredUsers = this.allNonAddedUsers.filter(
       (user) => !this.data.includes(user.uid)
     );
-    this.showUsers = filteredUsers
+    this.showUsers = filteredUsers;
   }
 }

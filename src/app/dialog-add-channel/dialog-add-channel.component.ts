@@ -27,11 +27,11 @@ export class DialogAddChannelComponent implements OnInit {
     this.getAllUsers();
 
     this.usersService.currentUserProfile$.subscribe((userProfile) => {
-      this.currentUserId = userProfile.uid;
+      if (userProfile && userProfile.uid) {
+        this.currentUserId = userProfile.uid;
+        this.deleteCurrentUserFromList();
+      }
     });
-    setTimeout(() => {
-      this.deleteCurrentUserFromList();
-    }, 100);
   }
 
   getAllUsers() {
